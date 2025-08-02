@@ -6,6 +6,8 @@ import AudioPlayer from "@/components/AudioPlayer";
 import { motion } from "framer-motion";
 
 const chaosGifs = [
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bzNkeTBxcGlkb3ZnNTFlZm5iNTV1aXYxbTI5OHpqdzdoZ2Vqam1seCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UDK35aduhiZD12eCi2/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dWVkaHZzNjcwYzUxOHA2dHQ5aTgybzV2OXVuOWgyZTM3cWd1eGh4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IRzab7wKChY7DjGmlj/giphy.gif",
   "https://media.giphy.com/media/8lgqAbycBjosxjfi9k/giphy.gif",
   "https://media.giphy.com/media/7C0wCAyx9qoKPIeToi/giphy.gif",
   "https://media.giphy.com/media/l3vRmiPDHYMxn9Eys/giphy.gif",
@@ -13,7 +15,7 @@ const chaosGifs = [
   "https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif",
   "https://media.giphy.com/media/7ZKpmNlwNnHWM/giphy.gif",
   "https://media.giphy.com/media/wW95fEq09hOI8/giphy.gif",
-  "https://media.giphy.com/media/VzH4jP7ppWF8dgCxcg/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dWVkaHZzNjcwYzUxOHA2dHQ5aTgybzV2OXVuOWgyZTM3cWd1eGh4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT1XGxEsybgh3WxhOE/giphy.gif",
 ];
 
 export default function Home() {
@@ -54,19 +56,21 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-lg bg-black/70 p-5 rounded-xl leading-relaxed border-2 border-blue-400 shadow-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Welcome to <span className="text-blue-300 font-bold">$ArbiPup</span> – 
-            the memecoin of <span className="font-bold text-pink-400">pure chaos</span> on{" "}
-            <span className="text-cyan-300 font-bold">Arbitrum</span>.
-            <br />
-            <span className="italic text-gray-300">
-              This isn’t a promise. This isn’t a plan. This is just chaos.
-            </span>
-          </motion.p>
+  className="bg-black/60 p-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-xl mx-auto"
+>
+  This is, <span className="text-blue-400 font-extrabold">$Arbipup</span>,      
+  the memecoin of <span className="text-pink-400 font-extrabold">pure chaos</span> on 
+  <span className="text-cyan-300 font-extrabold"> Arbitrum</span>.
+  <br />
+  <span className="italic text-gray-300">
+    This is not a promise. This is not a plan. This is just chaos.
+  </span>
+
+  <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
+    Disclaimer: $Arbipup is a memecoin with no intrinsic value, no roadmap, and no expectation of profit.
+    It is for entertainment purposes only. Nothing here is financial advice.
+  </span>
+</motion.p>
 
           {/* 🎁 Claim + Buy Buttons */}
           <div className="flex justify-center gap-6 mt-8">
@@ -75,7 +79,7 @@ export default function Home() {
               whileHover={{ scale: 1.1 }}
               className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg animate-pulse"
             >
-              🎁 Claim $ArbiPup
+              🎁 Claim $Arbipup
             </motion.a>
             <motion.a
               href="https://dexscreener.com"
@@ -84,7 +88,7 @@ export default function Home() {
               whileHover={{ scale: 1.1 }}
               className="bg-gradient-to-r from-green-400 to-lime-400 text-black font-bold py-3 px-6 rounded-xl shadow-lg animate-pulse"
             >
-              🛒 Buy $ArbiPup
+              🛒 Buy $Arbipup
             </motion.a>
           </div>
         </motion.section>
@@ -142,7 +146,7 @@ export default function Home() {
             animate={{ scale: [1, 1.05, 1], color: ["#fff", "#ff69b4", "#00ffff", "#fff"] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            $ArbiPup thrives in memes. If you expected a roadmap, you are already lost. 🐶💥
+            $Arbipup thrives in memes. If you expected a roadmap, you are already lost. 🐶💥
           </motion.p>
         </section>
       </main>

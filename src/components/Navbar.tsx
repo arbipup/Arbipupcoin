@@ -13,7 +13,7 @@ export default function Navbar() {
           alt="ArbiPup Logo" 
           className="w-10 h-10 sm:w-12 sm:h-12"
         />
-        <span className="font-extrabold text-lg sm:text-xl">ArbiPup</span>
+        <span className="font-extrabold text-lg sm:text-xl">Arbipup</span>
       </div>
 
       {/* Links & Icons */}
@@ -25,10 +25,10 @@ export default function Navbar() {
         >
           Claim
         </Link>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://x.com/arbipupcoin" target="_blank" rel="noopener noreferrer">
           <FaTwitter size={20} className="sm:size-22"/>
         </a>
-        <a href="https://t.me" target="_blank" rel="noopener noreferrer">
+        <a href="https://t.me/arbipupcoin" target="_blank" rel="noopener noreferrer">
           <FaTelegram size={20} className="sm:size-22"/>
         </a>
       </div>
