@@ -1,0 +1,13 @@
+{
+  "merkleRoot": "0x1490313405302073a097856b376722b8db3633eeb01504a65eade8055341ec0f",
+  "claims": [
+    {
+      "address": "0xef7ffb3192380c579a73e610ab8f5d1d3b0aa119",
+      "amount": 10000
+    },
+    {
+      "address": "0x1c4e33d0ab441ff12ae24bffe1c82dd9db74f92c",
+      "amount": 5000
+    }
+  ]
+}
