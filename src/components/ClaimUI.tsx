@@ -1,19 +1,12 @@
-// ClaimUI.tsx
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { createClient } from '@supabase/supabase-js';
 import { motion } from 'framer-motion';
 import { ethers } from 'ethers';
+import { getSupabase } from '../lib/supabaseClient'; // ✅ new import
 import claimAbi from '../abi/ClaimContract.json';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 const CONTRACT_ADDRESS = '0xDf00AAe3cc6798a2Eab99D0768c165aeeD72a734';
 const CLAIM_FEE_ETH = '0.00003';
@@ -26,11 +19,17 @@ const sadSound = 'https://www.myinstants.com/media/sounds/sadtrombone.mp3';
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+
+  const [supabase, setSupabase] = useState<any>(null); // ✅ dynamic supabase
   const [agreed, setAgreed] = useState(false);
   const [eligibility, setEligibility] = useState<'unknown' | 'eligible' | 'ineligible'>('unknown');
   const [claimed, setClaimed] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+
+  useEffect(() => {
+    setSupabase(getSupabase()); // ✅ init Supabase only on client
+  }, []);
 
   const resetFlow = () => {
     setAgreed(false);
@@ -39,10 +38,12 @@ export default function ClaimPage() {
   };
 
   const checkEligibility = async () => {
+    if (!supabase || !address) return;
+
     const { data, error } = await supabase
       .from('wallets')
       .select('tx_count, claimed')
-      .eq('address', address!.toLowerCase());
+      .eq('address', address.toLowerCase());
 
     if (error || !data || data.length === 0) {
       setEligibility('ineligible');
@@ -60,9 +61,9 @@ export default function ClaimPage() {
   };
 
   const handleClaim = async () => {
-    try {
-      if (!address) return;
+    if (!supabase || !address) return;
 
+    try {
       setIsClaiming(true);
       const { ethereum } = window as any;
       if (!ethereum) throw new Error("Wallet not found");
@@ -71,10 +72,7 @@ export default function ClaimPage() {
       const signer = await provider.getSigner();
 
       const contract = new ethers.Contract(CONTRACT_ADDRESS, claimAbi, signer);
-
-      const tx = await contract.claim({
-        value: ethers.parseEther(CLAIM_FEE_ETH),
-      });
+      const tx = await contract.claim({ value: ethers.parseEther(CLAIM_FEE_ETH) });
 
       await tx.wait();
 
@@ -121,7 +119,6 @@ export default function ClaimPage() {
 
   return (
     <div className="min-h-screen bg-black text-white py-10 px-4 flex flex-col items-center space-y-10">
-      {/* 🔊 Sound Toggle */}
       <div className="absolute top-5 right-5">
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
@@ -198,7 +195,7 @@ export default function ClaimPage() {
           )}
           {eligibility === 'ineligible' && (
             <div className="text-center">
-              <p className="text-red-400 font-semibold mb-2">Sorry, You are unlucky this time, not eligible ❌</p>
+              <p className="text-red-400 font-semibold mb-2">Sorry, You are unlucky this time ❌</p>
               <motion.img
                 src={sadGif}
                 alt="Sad"
@@ -233,4 +230,3 @@ export default function ClaimPage() {
     </div>
   );
 }
-

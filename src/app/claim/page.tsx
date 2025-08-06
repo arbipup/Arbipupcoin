@@ -1,19 +1,15 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { motion } from 'framer-motion';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AudioPlayer from '@/components/AudioPlayer';
 import ClaimFlow from '@/components/ClaimUI';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { getSupabase } from '@/lib/supabaseClient';
 
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
@@ -26,6 +22,9 @@ export default function ClaimPage() {
 
   useEffect(() => {
     const fetchStartTime = async () => {
+      const supabase = getSupabase();
+      if (!supabase) return;
+
       const { data, error } = await supabase
         .from('global_timer')
         .select('starts_at')
@@ -63,6 +62,9 @@ export default function ClaimPage() {
         return;
       }
 
+      const supabase = getSupabase();
+      if (!supabase) return;
+
       const { data } = await supabase
         .from('wallets')
         .select('address')
@@ -78,7 +80,8 @@ export default function ClaimPage() {
     setLoading(true);
     setError('');
 
-    if (!address) {
+    const supabase = getSupabase();
+    if (!supabase || !address) {
       setError('Please connect your wallet first.');
       setLoading(false);
       return;
@@ -122,9 +125,9 @@ export default function ClaimPage() {
   return (
     <div className="relative min-h-screen text-white flex flex-col overflow-hidden">
       <Navbar />
-      <AudioPlayer /> {/* 🔊 SOUND TOGGLE UI BACK HERE */}
+      <AudioPlayer />
 
-      {/* Background GIF grid */}
+      {/* Background grid */}
       <div className="fixed inset-0 -z-10 grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 opacity-30 animate-color-cycle">
         {Array.from({ length: 70 }).map((_, i) => (
           <motion.img
