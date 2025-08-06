@@ -159,7 +159,7 @@ export default function ClaimPage() {
         <section className="p-6 rounded-xl bg-gradient-to-br from-green-700 to-green-600 shadow-lg">
           <h2 className="text-2xl font-bold mb-4">4. Claim Reward</h2>
           {claimed ? (
-            <p className="text-green-300 font-semibold">🎉 You've already claimed your 8,000 $ArbiPup!</p>
+            <p className="text-green-300 font-semibold">🎉 You have already claimed your 8,000 $ArbiPup!</p>
           ) : (
             <>
               <p className="text-sm mb-2">Reward: <strong>8,000 $ArbiPup</strong></p>
