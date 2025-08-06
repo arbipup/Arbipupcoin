@@ -9,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AudioPlayer from '@/components/AudioPlayer';
 import ClaimFlow from '@/components/ClaimUI';
-import { getSupabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
@@ -22,9 +22,6 @@ export default function ClaimPage() {
 
   useEffect(() => {
     const fetchStartTime = async () => {
-      const supabase = getSupabase();
-      if (!supabase) return;
-
       const { data, error } = await supabase
         .from('global_timer')
         .select('starts_at')
@@ -62,9 +59,6 @@ export default function ClaimPage() {
         return;
       }
 
-      const supabase = getSupabase();
-      if (!supabase) return;
-
       const { data } = await supabase
         .from('wallets')
         .select('address')
@@ -80,8 +74,7 @@ export default function ClaimPage() {
     setLoading(true);
     setError('');
 
-    const supabase = getSupabase();
-    if (!supabase || !address) {
+    if (!address) {
       setError('Please connect your wallet first.');
       setLoading(false);
       return;

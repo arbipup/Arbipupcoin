@@ -5,7 +5,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { motion } from 'framer-motion';
 import { ethers } from 'ethers';
-import { getSupabase } from '../lib/supabaseClient'; // ✅ new import
+import { supabase } from '../lib/supabaseClient'; // ✅ use this directly
 import claimAbi from '../abi/ClaimContract.json';
 
 const CONTRACT_ADDRESS = '0xDf00AAe3cc6798a2Eab99D0768c165aeeD72a734';
@@ -20,16 +20,11 @@ export default function ClaimPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 
-  const [supabase, setSupabase] = useState<any>(null); // ✅ dynamic supabase
   const [agreed, setAgreed] = useState(false);
   const [eligibility, setEligibility] = useState<'unknown' | 'eligible' | 'ineligible'>('unknown');
   const [claimed, setClaimed] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
-
-  useEffect(() => {
-    setSupabase(getSupabase()); // ✅ init Supabase only on client
-  }, []);
 
   const resetFlow = () => {
     setAgreed(false);
