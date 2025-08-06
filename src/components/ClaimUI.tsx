@@ -6,17 +6,14 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { createClient } from '@supabase/supabase-js';
 import { motion } from 'framer-motion';
 import { ethers } from 'ethers';
-import claimAbi from '../abi/ClaimContract.json'; // ✅ Ensure correct path
+import claimAbi from '../abi/ClaimContract.json';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// ✅ Your contract address
 const CONTRACT_ADDRESS = '0xDf00AAe3cc6798a2Eab99D0768c165aeeD72a734';
-
-// ✅ Claim fee (in ETH)
 const CLAIM_FEE_ETH = '0.00003';
 
 const happyGif = 'https://media.giphy.com/media/LMcB8XospGZO8UQq87/giphy.gif';
@@ -31,6 +28,7 @@ export default function ClaimPage() {
   const [eligibility, setEligibility] = useState<'unknown' | 'eligible' | 'ineligible'>('unknown');
   const [claimed, setClaimed] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
 
   const resetFlow = () => {
     setAgreed(false);
@@ -64,7 +62,6 @@ export default function ClaimPage() {
       if (!address) return;
 
       setIsClaiming(true);
-
       const { ethereum } = window as any;
       if (!ethereum) throw new Error("Wallet not found");
 
@@ -77,7 +74,7 @@ export default function ClaimPage() {
         value: ethers.parseEther(CLAIM_FEE_ETH),
       });
 
-      await tx.wait(); // Wait for blockchain confirmation
+      await tx.wait();
 
       const { error } = await supabase
         .from('wallets')
@@ -85,14 +82,12 @@ export default function ClaimPage() {
         .eq('address', address.toLowerCase());
 
       if (error) {
-        console.error("Supabase update failed:", error);
-        alert('✅ Claim successful, but failed to update backend.');
+        alert('✅ Claimed, but failed to update backend.');
         return;
       }
 
       setClaimed(true);
       alert('🎉 Claim successful!');
-
     } catch (err: any) {
       console.error("Claim error:", err);
       alert('❌ Claim failed: ' + (err?.reason || err?.message || 'Unknown error'));
@@ -101,7 +96,12 @@ export default function ClaimPage() {
     }
   };
 
-  const playSound = (url: string) => new Audio(url).play();
+  const playSound = (url: string) => {
+    if (soundEnabled) {
+      const audio = new Audio(url);
+      audio.play().catch(() => {});
+    }
+  };
 
   useEffect(() => {
     if (eligibility === 'eligible') playSound(happySound);
@@ -119,7 +119,17 @@ export default function ClaimPage() {
 
   return (
     <div className="min-h-screen bg-black text-white py-10 px-4 flex flex-col items-center space-y-10">
-      {/* Section 1: Connect Wallet */}
+      {/* 🔊 Sound Toggle */}
+      <div className="absolute top-5 right-5">
+        <button
+          onClick={() => setSoundEnabled(!soundEnabled)}
+          className="text-white bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full text-sm"
+        >
+          {soundEnabled ? '🔊 Sound On' : '🔇 Sound Off'}
+        </button>
+      </div>
+
+      {/* 1. Connect Wallet */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -141,7 +151,7 @@ export default function ClaimPage() {
         )}
       </motion.div>
 
-      {/* Section 2: Agree to Terms */}
+      {/* 2. Agree to Terms */}
       {isConnected && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -168,7 +178,7 @@ export default function ClaimPage() {
         </motion.div>
       )}
 
-      {/* Section 3: Eligibility Check */}
+      {/* 3. Check Eligibility */}
       {isConnected && agreed && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -184,7 +194,6 @@ export default function ClaimPage() {
               Check Eligibility
             </button>
           )}
-
           {eligibility === 'eligible' && (
             <div className="text-center">
               <p className="text-green-400 font-semibold mb-2">You are eligible! 🟢</p>
@@ -197,10 +206,9 @@ export default function ClaimPage() {
               />
             </div>
           )}
-
           {eligibility === 'ineligible' && (
             <div className="text-center">
-              <p className="text-red-400 font-semibold mb-2">Sorry, not eligible ❌</p>
+              <p className="text-red-400 font-semibold mb-2">Sorry, You are unlucky this time, not eligible ❌</p>
               <motion.img
                 src={sadGif}
                 alt="Sad"
@@ -213,7 +221,7 @@ export default function ClaimPage() {
         </motion.div>
       )}
 
-      {/* Section 4: Claim */}
+      {/* 4. Claim Tokens */}
       {isConnected && agreed && eligibility === 'eligible' && (
         <motion.div
           initial={{ opacity: 0 }}
