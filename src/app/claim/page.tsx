@@ -8,8 +8,7 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AudioPlayer from '@/components/AudioPlayer';
-import ClaimFlow from "@/components/ClaimUI";
-
+import ClaimFlow from '@/components/ClaimUI';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +24,6 @@ export default function ClaimPage() {
   const [error, setError] = useState('');
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
 
-  // Timer
   useEffect(() => {
     const fetchStartTime = async () => {
       const { data, error } = await supabase
@@ -35,7 +33,7 @@ export default function ClaimPage() {
         .single();
 
       if (error) {
-        console.error('Error fetching timer:', error);
+        console.error('Timer fetch error:', error);
         return;
       }
 
@@ -58,7 +56,6 @@ export default function ClaimPage() {
     fetchStartTime();
   }, []);
 
-  // Check if already submitted
   useEffect(() => {
     const checkIfSubmitted = async () => {
       if (!address || !isConnected) {
@@ -82,7 +79,7 @@ export default function ClaimPage() {
     setError('');
 
     if (!address) {
-      setError('Please connect your wallet.');
+      setError('Please connect your wallet first.');
       setLoading(false);
       return;
     }
@@ -108,7 +105,7 @@ export default function ClaimPage() {
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      setError('Submission failed. Try again.');
+      setError('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -125,7 +122,7 @@ export default function ClaimPage() {
   return (
     <div className="relative min-h-screen text-white flex flex-col overflow-hidden">
       <Navbar />
-      <AudioPlayer />
+      <AudioPlayer /> {/* 🔊 SOUND TOGGLE UI BACK HERE */}
 
       {/* Background GIF grid */}
       <div className="fixed inset-0 -z-10 grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 opacity-30 animate-color-cycle">
@@ -142,7 +139,6 @@ export default function ClaimPage() {
         ))}
       </div>
 
-      {/* Main content */}
       <main className="flex-grow pt-28 px-6 space-y-16 relative z-10 text-center">
         <motion.div
           className="max-w-md mx-auto p-4 bg-black/40 backdrop-blur-md border border-purple-500 rounded-xl shadow-xl"
@@ -151,7 +147,7 @@ export default function ClaimPage() {
           transition={{ duration: 1.2, ease: 'easeOut' }}
         >
           <h1 className="text-xl sm:text-2xl font-semibold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-relaxed">
-            ⚡️ Chaos is about to hit Arbitrum, dawg! Submit your wallet now before submissions close, do not miss the madness.
+            ⚡️ Chaos is coming to Arbitrum. Lock in your wallet before the storm hits!
           </h1>
         </motion.div>
 
@@ -162,10 +158,6 @@ export default function ClaimPage() {
         )}
 
         <div className="max-w-xl mx-auto bg-black/70 rounded-2xl p-8 border border-white/20 shadow-lg">
-          <p className="text-lg text-gray-300 mb-6">
-            Submit your wallet to get checked for eligibility. Only wallets with 50+ Arbitrum txs will qualify. One submission per address.
-          </p>
-
           {!isConnected ? (
             <div className="mb-6 flex justify-center">
               <ConnectButton showBalance={false} chainStatus="icon" />
@@ -179,7 +171,7 @@ export default function ClaimPage() {
                 onClick={() => disconnect()}
                 className="mb-4 px-4 py-2 bg-red-600 rounded-xl font-semibold hover:bg-red-700"
               >
-                Disconnect Wallet
+                Disconnect
               </button>
 
               <button
@@ -201,7 +193,7 @@ export default function ClaimPage() {
           {isConnected && submitted && (
             <div className="mt-8 flex flex-col items-center justify-center space-y-4">
               <p className="text-xl font-bold px-4 py-2 bg-gradient-to-r from-pink-600 via-purple-500 to-blue-500 text-white rounded-xl shadow-lg">
-                🎉 Your wallet has been submitted successfully! Stay tuned, eligibility checks and claiming details will be announced soon.
+                🎉 Success! Your wallet is locked in. Stay tuned for the next phase.
               </p>
               <motion.img
                 src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjJzamxwOTRtYm5lamM3YWE2c3R3cWpwZ2ZkaDIwMWlmN3VhbWJjeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jp2KXzsPtoKFG/giphy.gif"
