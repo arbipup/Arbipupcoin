@@ -1,14 +1,15 @@
 'use client';
 
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { useAccount, useDisconnect } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AudioPlayer from '@/components/AudioPlayer';
-import { motion } from 'framer-motion';
-import { useAccount, useDisconnect } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import ClaimFlow from "@/components/ClaimUI";
+
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -18,12 +19,13 @@ const supabase = createClient(
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
-  const [canSubmit, setCanSubmit] = useState(false);
 
+  // Timer
   useEffect(() => {
     const fetchStartTime = async () => {
       const { data, error } = await supabase
@@ -42,10 +44,9 @@ export default function ClaimPage() {
         const endTime = startTime + 3 * 24 * 60 * 60 * 1000;
 
         const updateTimer = () => {
-          const now = new Date().getTime();
+          const now = Date.now();
           const diff = Math.max(endTime - now, 0);
           setRemainingTime(diff);
-          setCanSubmit(diff <= 0);
         };
 
         updateTimer();
@@ -57,6 +58,7 @@ export default function ClaimPage() {
     fetchStartTime();
   }, []);
 
+  // Check if already submitted
   useEffect(() => {
     const checkIfSubmitted = async () => {
       if (!address || !isConnected) {
@@ -64,14 +66,12 @@ export default function ClaimPage() {
         return;
       }
 
-      const { data: existing, error: fetchErr } = await supabase
+      const { data } = await supabase
         .from('wallets')
-        .select('*')
+        .select('address')
         .eq('address', address.toLowerCase());
 
-      if (!fetchErr && existing && existing.length > 0) {
-        setSubmitted(true);
-      }
+      setSubmitted((data?.length ?? 0) > 0);
     };
 
     checkIfSubmitted();
@@ -88,14 +88,12 @@ export default function ClaimPage() {
     }
 
     try {
-      const { data: existing, error: fetchErr } = await supabase
+      const { data: existing } = await supabase
         .from('wallets')
-        .select('*')
+        .select('address')
         .eq('address', address.toLowerCase());
 
-      if (fetchErr) throw fetchErr;
-
-      if (existing && existing.length > 0) {
+      if ((existing?.length ?? 0) > 0) {
         setSubmitted(true);
         setLoading(false);
         return;
@@ -129,6 +127,7 @@ export default function ClaimPage() {
       <Navbar />
       <AudioPlayer />
 
+      {/* Background GIF grid */}
       <div className="fixed inset-0 -z-10 grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 opacity-30 animate-color-cycle">
         {Array.from({ length: 70 }).map((_, i) => (
           <motion.img
@@ -143,19 +142,18 @@ export default function ClaimPage() {
         ))}
       </div>
 
+      {/* Main content */}
       <main className="flex-grow pt-28 px-6 space-y-16 relative z-10 text-center">
         <motion.div
-  className="max-w-md mx-auto p-4 bg-black/40 backdrop-blur-md border border-purple-500 rounded-xl shadow-xl"
-  initial={{ scale: 0.9, rotate: -2, opacity: 0 }}
-  animate={{ scale: 1, rotate: 0, opacity: 1 }}
-  transition={{ duration: 1.2, ease: "easeOut" }}
->
-  <h1 className="text-xl sm:text-2xl font-semibold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-relaxed">
-    ⚡️ Chaos is about to hit Arbitrum, dawg!  
-    Submit your wallet now before submissions close, do not miss the madness.
-  </h1>
-</motion.div>
-
+          className="max-w-md mx-auto p-4 bg-black/40 backdrop-blur-md border border-purple-500 rounded-xl shadow-xl"
+          initial={{ scale: 0.9, rotate: -2, opacity: 0 }}
+          animate={{ scale: 1, rotate: 0, opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+        >
+          <h1 className="text-xl sm:text-2xl font-semibold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-relaxed">
+            ⚡️ Chaos is about to hit Arbitrum, dawg! Submit your wallet now before submissions close, do not miss the madness.
+          </h1>
+        </motion.div>
 
         {remainingTime !== null && remainingTime > 0 && (
           <div className="text-2xl font-bold text-cyan-300 bg-black/60 py-2 px-6 inline-block rounded-xl border border-cyan-500 shadow-md">
@@ -168,13 +166,11 @@ export default function ClaimPage() {
             Submit your wallet to get checked for eligibility. Only wallets with 50+ Arbitrum txs will qualify. One submission per address.
           </p>
 
-          {!isConnected && (
+          {!isConnected ? (
             <div className="mb-6 flex justify-center">
               <ConnectButton showBalance={false} chainStatus="icon" />
             </div>
-          )}
-
-          {isConnected && (
+          ) : (
             <>
               <p className="text-green-400 mb-2">
                 Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
@@ -185,19 +181,18 @@ export default function ClaimPage() {
               >
                 Disconnect Wallet
               </button>
-              {canSubmit && (
-                <button
-                  onClick={handleSubmit}
-                  disabled={submitted || loading}
-                  className={`py-3 px-6 rounded-xl font-bold transition ${
-                    submitted
-                      ? 'bg-green-600 cursor-default'
-                      : 'bg-gradient-to-r from-blue-500 to-cyan-400 hover:scale-105'
-                  }`}
-                >
-                  {submitted ? '✅ Wallet Submitted' : loading ? 'Submitting...' : 'Submit Wallet'}
-                </button>
-              )}
+
+              <button
+                onClick={handleSubmit}
+                disabled={submitted || loading}
+                className={`py-3 px-6 rounded-xl font-bold transition ${
+                  submitted
+                    ? 'bg-green-600 cursor-default'
+                    : 'bg-gradient-to-r from-blue-500 to-cyan-400 hover:scale-105'
+                }`}
+              >
+                {submitted ? '✅ Wallet Submitted' : loading ? 'Submitting...' : 'Submit Wallet'}
+              </button>
             </>
           )}
 
@@ -206,7 +201,7 @@ export default function ClaimPage() {
           {isConnected && submitted && (
             <div className="mt-8 flex flex-col items-center justify-center space-y-4">
               <p className="text-xl font-bold px-4 py-2 bg-gradient-to-r from-pink-600 via-purple-500 to-blue-500 text-white rounded-xl shadow-lg">
-                🎉 Your wallet has been submitted successfully!, Stay tuned, eligibility checks and claiming details will be announced soon.
+                🎉 Your wallet has been submitted successfully! Stay tuned, eligibility checks and claiming details will be announced soon.
               </p>
               <motion.img
                 src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjJzamxwOTRtYm5lamM3YWE2c3R3cWpwZ2ZkaDIwMWlmN3VhbWJjeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jp2KXzsPtoKFG/giphy.gif"
@@ -218,6 +213,8 @@ export default function ClaimPage() {
             </div>
           )}
         </div>
+
+        <ClaimFlow />
       </main>
 
       <Footer />
