@@ -1,3 +1,5 @@
+// ClaimUI.tsx
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -130,11 +132,7 @@ export default function ClaimPage() {
       </div>
 
       {/* 1. Connect Wallet */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="w-full max-w-md p-6 bg-gray-900 rounded-xl shadow-xl space-y-4"
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-900 rounded-xl shadow-xl space-y-4">
         <h2 className="text-2xl font-bold mb-2">1. Connect Your Wallet</h2>
         {!isConnected ? (
           <ConnectButton />
@@ -153,11 +151,7 @@ export default function ClaimPage() {
 
       {/* 2. Agree to Terms */}
       {isConnected && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="w-full max-w-md p-6 bg-gray-800 rounded-xl shadow-xl space-y-4"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-800 rounded-xl shadow-xl space-y-4">
           <h2 className="text-2xl font-bold mb-2">2. Agree to Terms</h2>
           <ul className="text-sm list-disc pl-5 text-gray-400 space-y-1">
             <li>Only 1 wallet per user</li>
@@ -180,11 +174,7 @@ export default function ClaimPage() {
 
       {/* 3. Check Eligibility */}
       {isConnected && agreed && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="w-full max-w-md p-6 bg-gray-700 rounded-xl shadow-xl space-y-4"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-700 rounded-xl shadow-xl space-y-4">
           <h2 className="text-2xl font-bold mb-2">3. Check Eligibility</h2>
           {eligibility === 'unknown' && (
             <button
@@ -223,11 +213,7 @@ export default function ClaimPage() {
 
       {/* 4. Claim Tokens */}
       {isConnected && agreed && eligibility === 'eligible' && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="w-full max-w-md p-6 bg-green-800 rounded-xl shadow-xl space-y-4"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-green-800 rounded-xl shadow-xl space-y-4">
           <h2 className="text-2xl font-bold mb-2">4. Claim Your Tokens</h2>
           {!claimed ? (
             <button
@@ -247,3 +233,4 @@ export default function ClaimPage() {
     </div>
   );
 }
+
