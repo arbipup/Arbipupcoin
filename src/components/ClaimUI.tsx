@@ -17,7 +17,7 @@ export default function ClaimPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-md">
-          Eligibilty check, and claim and TME soon 🐶🔥
+          Eligibilty check, claim and TGE soon 🐶🔥
         </h1>
         <p className="text-lg text-gray-300 max-w-md mx-auto">
           Connect your wallet and see if you're part of the chosen ones.
@@ -46,7 +46,7 @@ export default function ClaimPage() {
           🚧 CLAIM COMING SOON
         </h2>
         <p className="text-sm text-gray-300">
-          Touch grass. Chaos is not ready yet. Check back when the stars align. 🌌
+          Touch grass. $Arbipup is not ready yet. Check back when the stars align. 🌌
         </p>
       </motion.div>
     </div>
