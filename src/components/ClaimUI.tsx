@@ -5,14 +5,14 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { motion } from 'framer-motion';
 import { ethers } from 'ethers';
-import { supabase } from '../lib/supabaseClient'; // ✅ use this directly
+import { supabase } from '../lib/supabaseClient';
 import claimAbi from '../abi/ClaimContract.json';
 
-const CONTRACT_ADDRESS = '0xDf00AAe3cc6798a2Eab99D0768c165aeeD72a734';
+const CONTRACT_ADDRESS = '0x669CBed6828e9cFDBCe36f1116A2cE5fc1e563C8';
 const CLAIM_FEE_ETH = '0.00003';
 
-const happyGif = 'https://media.giphy.com/media/LMcB8XospGZO8UQq87/giphy.gif';
-const sadGif = 'https://media.giphy.com/media/3oz8xKaR836UJOYeOc/giphy.gif';
+const happyGif = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZhY3pnajFwaTl6NjBqeXVwNXptMTc0aG9wY2kyemJxcWRrdmJ4ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VpysUTI25mTlK/giphy.gif';
+const sadGif = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY4aDhuOXFtOGo0YTQ4NzE5dW9rYW1rZzNjZjc0ejJkanV0bW51MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/L5WQjD4p8IpO0/giphy.gif';
 const happySound = 'https://www.myinstants.com/media/sounds/that-was-easy.mp3';
 const sadSound = 'https://www.myinstants.com/media/sounds/sadtrombone.mp3';
 
@@ -113,19 +113,19 @@ export default function ClaimPage() {
   }, [isConnected]);
 
   return (
-    <div className="min-h-screen bg-black text-white py-10 px-4 flex flex-col items-center space-y-10">
+    <div className="min-h-screen bg-gradient-to-br from-[#111] to-[#222] text-white py-12 px-4 flex flex-col items-center space-y-10">
       <div className="absolute top-5 right-5">
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
-          className="text-white bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full text-sm"
+          className="text-white bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full text-sm shadow"
         >
           {soundEnabled ? '🔊 Sound On' : '🔇 Sound Off'}
         </button>
       </div>
 
-      {/* 1. Connect Wallet */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-900 rounded-xl shadow-xl space-y-4">
-        <h2 className="text-2xl font-bold mb-2">1. Connect Your Wallet</h2>
+      {/* Wallet Connect */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-black/70 backdrop-blur-md rounded-2xl shadow-2xl space-y-4 border border-gray-700">
+        <h2 className="text-3xl font-extrabold text-yellow-400">1. Connect Wallet</h2>
         {!isConnected ? (
           <ConnectButton />
         ) : (
@@ -133,7 +133,7 @@ export default function ClaimPage() {
             <p className="text-sm">Connected: <span className="font-mono">{address?.slice(0, 6)}...{address?.slice(-4)}</span></p>
             <button
               onClick={() => disconnect()}
-              className="w-full py-2 bg-red-600 hover:bg-red-700 rounded-xl text-sm"
+              className="w-full py-2 bg-red-600 hover:bg-red-700 rounded-xl text-sm font-bold"
             >
               Disconnect
             </button>
@@ -141,17 +141,23 @@ export default function ClaimPage() {
         )}
       </motion.div>
 
-      {/* 2. Agree to Terms */}
+      {/* Terms */}
       {isConnected && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-800 rounded-xl shadow-xl space-y-4">
-          <h2 className="text-2xl font-bold mb-2">2. Agree to Terms</h2>
-          <ul className="text-sm list-disc pl-5 text-gray-400 space-y-1">
-            <li>Only 1 wallet per user</li>
-            <li>Must be on Arbitrum network</li>
-            <li>Claim fee: {CLAIM_FEE_ETH} ETH required</li>
-            <li>Contract wallets not allowed</li>
-            <li>Claim is final and cannot be undone</li>
-          </ul>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-black/70 backdrop-blur-md rounded-2xl shadow-2xl space-y-4 border border-gray-700">
+            <h2 className="text-2xl font-bold text-pink-300">2. Terms & Conditions</h2>
+<ul className="text-sm list-disc pl-5 text-gray-300 space-y-1">
+  <li>One wallet per degen. Do not be greedy.</li>
+  <li>Only works on Arbitrum. L2 gang only.</li>
+  <li>No contract wallets. Bots, take the L.</li>
+  <li>Once you claim, that's it. No undo button.</li>
+  <li>Not financial advice. We're just having fun here.</li>
+  <li>No promises, no moon guarantees, no lambos.</li>
+</ul>
+
+
+          <p className="text-xs text-gray-400 italic">
+            Disclaimer: This is a chaotic experiment. Not financial advice. 🐶🔥
+          </p>
           <label className="flex items-center space-x-2 mt-3">
             <input
               type="checkbox"
@@ -159,26 +165,27 @@ export default function ClaimPage() {
               onChange={(e) => setAgreed(e.target.checked)}
               className="form-checkbox h-4 w-4 text-blue-500"
             />
-            <span>I agree to the above terms ✅</span>
+            <span>I accept these terms</span>
           </label>
         </motion.div>
       )}
 
-      {/* 3. Check Eligibility */}
+      {/* Eligibility */}
       {isConnected && agreed && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-gray-700 rounded-xl shadow-xl space-y-4">
-          <h2 className="text-2xl font-bold mb-2">3. Check Eligibility</h2>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-black/70 backdrop-blur-md rounded-2xl shadow-2xl space-y-4 border border-gray-700">
+          <h2 className="text-2xl font-bold text-blue-300">3. Eligibility Check</h2>
           {eligibility === 'unknown' && (
             <button
               onClick={checkEligibility}
-              className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold"
+              className="w-full py-2 bg-blue-500 hover:bg-blue-600 rounded-xl font-bold"
             >
-              Check Eligibility
+              Check Now
             </button>
           )}
           {eligibility === 'eligible' && (
             <div className="text-center">
-              <p className="text-green-400 font-semibold mb-2">You are eligible! 🟢</p>
+              <p className="text-green-400 font-semibold mb-2"> 🐶 Lucky dawg, you actually made it!
+🎯 Eligibility unlocked, destiny, and memes are on your side!</p>
               <motion.img
                 src={happyGif}
                 alt="Happy"
@@ -190,7 +197,8 @@ export default function ClaimPage() {
           )}
           {eligibility === 'ineligible' && (
             <div className="text-center">
-              <p className="text-red-400 font-semibold mb-2">Sorry, You are unlucky this time ❌</p>
+              <p className="text-red-400 font-semibold mb-2">😵 Dawg, you missed it this time...
+Maybe it is time to touch grass or get a real job.</p>
               <motion.img
                 src={sadGif}
                 alt="Sad"
@@ -203,21 +211,23 @@ export default function ClaimPage() {
         </motion.div>
       )}
 
-      {/* 4. Claim Tokens */}
+      {/* Claim */}
       {isConnected && agreed && eligibility === 'eligible' && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-green-800 rounded-xl shadow-xl space-y-4">
-          <h2 className="text-2xl font-bold mb-2">4. Claim Your Tokens</h2>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-md p-6 bg-black/70 backdrop-blur-md rounded-2xl shadow-2xl space-y-4 border border-gray-700">
+          <h2 className="text-2xl font-bold text-green-300">4. Claim Reward</h2>
           {!claimed ? (
             <button
               onClick={handleClaim}
               disabled={isClaiming}
-              className="w-full py-2 bg-green-500 hover:bg-green-600 rounded-xl font-bold"
+              className="w-full py-2 bg-green-500 hover:bg-green-600 rounded-xl font-extrabold"
             >
-              {isClaiming ? 'Claiming...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
+              {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
             </button>
           ) : (
             <p className="text-center text-green-300 font-semibold">
-              🎉 You already claimed your tokens!
+              🎉 Already claimed, dawg!
+🐾 Check that wallet, your pup is in.
+📦 Now sit tight and wait for the big bang (aka official listing)! 💥
             </p>
           )}
         </motion.div>

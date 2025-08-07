@@ -4,18 +4,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AudioPlayer from "@/components/AudioPlayer";
 import { motion } from "framer-motion";
+import { div } from "framer-motion/client";
 
 const chaosGifs = [
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bzNkeTBxcGlkb3ZnNTFlZm5iNTV1aXYxbTI5OHpqdzdoZ2Vqam1seCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/UDK35aduhiZD12eCi2/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZhY3pnajFwaTl6NjBqeXVwNXptMTc0aG9wY2kyemJxcWRrdmJ4ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/fDuWkkOeLHXxsteAcE/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dWVkaHZzNjcwYzUxOHA2dHQ5aTgybzV2OXVuOWgyZTM3cWd1eGh4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IRzab7wKChY7DjGmlj/giphy.gif",
-  "https://media.giphy.com/media/8lgqAbycBjosxjfi9k/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aXRna3J5aGt1YWhmeW1tZHhzdzFnNm9hemhtbGxhd2hqdDgxaXdzcyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jC1zKGLmfVYXDEgUii/giphy.gif",
   "https://media.giphy.com/media/7C0wCAyx9qoKPIeToi/giphy.gif",
-  "https://media.giphy.com/media/l3vRmiPDHYMxn9Eys/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ODN1dHJxajI4dWZrMXNsZDZ6ejdrNGN6dmJjdGUwOTU3aXdtdmFsZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AhC404o1telGIDToPC/giphy.gif",
   "https://media.giphy.com/media/VzH4jP7ppWF8dgCxcg/giphy.gif",
   "https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif",
-  "https://media.giphy.com/media/7ZKpmNlwNnHWM/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZhY3pnajFwaTl6NjBqeXVwNXptMTc0aG9wY2kyemJxcWRrdmJ4ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VpysUTI25mTlK/giphy.gif",
   "https://media.giphy.com/media/wW95fEq09hOI8/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dWVkaHZzNjcwYzUxOHA2dHQ5aTgybzV2OXVuOWgyZTM3cWd1eGh4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT1XGxEsybgh3WxhOE/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZhY3pnajFwaTl6NjBqeXVwNXptMTc0aG9wY2kyemJxcWRrdmJ4ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/gFW9rRpOkMRBY2KF6s/giphy.gif",
 ];
 
 export default function Home() {
@@ -56,14 +57,13 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-  className="bg-black/60 p-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-xl mx-auto"
->
-  This is, <span className="text-blue-400 font-extrabold">$Arbipup</span>,      
-  the memecoin of <span className="text-pink-400 font-extrabold">pure chaos</span> on 
-  <span className="text-cyan-300 font-extrabold"> Arbitrum</span>.
+  className="bg-black/60 p-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-xl mx-auto">
+  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span>   
+  the unhinged memecoin born from <span className="text-pink-400 font-extrabold">pure chaos</span>,  
+  unleashed on <span className="text-cyan-300 font-extrabold">Arbitrum</span>.
   <br />
   <span className="italic text-gray-300">
-    This is not a promise. This is not a plan. This is just chaos.
+    No roadmap. No promises. No mercy. Just absolute, feral, tail-wagging mayhem.
   </span>
 
   <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
@@ -112,7 +112,7 @@ export default function Home() {
             <motion.li whileHover={{ scale: 1.05 }}>🟣 <strong>Team / Marketing:</strong> 10%</motion.li>
           </ul>
           <p className="mt-6 italic text-cyan-300 text-center">
-            2 Billion unleashed for memes, madness & Arbitrum chaos.
+            2 Billion unleashed for memes, madness & chaos.
           </p>
         </motion.section>
 
@@ -124,7 +124,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            Absolute Chaos Gallery
+            Absolute Chaos Season
           </motion.h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {chaosGifs.map((gif, i) => (
@@ -142,14 +142,94 @@ export default function Home() {
 
           {/* 🔥 Animated Meme Text */}
           <motion.p
-            className="mt-8 text-lg font-bold text-white bg-black/80 px-4 py-2 rounded-lg inline-block border border-pink-400 shadow-lg"
-            animate={{ scale: [1, 1.05, 1], color: ["#fff", "#ff69b4", "#00ffff", "#fff"] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            $Arbipup thrives in memes. If you expected a roadmap, you are already lost. 🐶💥
-          </motion.p>
+  className="mt-8 text-lg font-bold text-white bg-black/80 px-4 py-2 rounded-lg inline-block border border-pink-400 shadow-lg whitespace-pre-line"
+  animate={{ scale: [1, 1.05, 1], color: ["#fff", "#ff69b4", "#00ffff", "#fff"] }}
+  transition={{ duration: 2, repeat: Infinity }}
+>
+  😵‍💫 404: Roadmap not found.
+  $Arbipup.exe has gone rogue.
+  Meme core overload detected.
+  Brace for absolute chaos. 🐕💣🌀
+</motion.p>
+
         </section>
       </main>
+     {/* 🧪 Degenerate Labs Experiments */}
+<motion.section
+  className="max-w-5xl mx-auto mt-24 bg-black/80 p-10 rounded-2xl border border-cyan-500 shadow-2xl"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 0.8 }}
+>
+  <h2 className="text-4xl font-extrabold text-cyan-300 mb-6 animate-pulse">
+    🧪 Forbidden Pup Rituals
+  </h2>
+  <div className="grid sm:grid-cols-2 gap-6 text-left text-sm text-gray-300">
+    <div className="bg-black/60 p-5 rounded-xl border border-cyan-400">
+      <h3 className="text-lg font-bold text-cyan-300 mb-2">🔥 Howl of the Moon Market</h3>
+      <p>Traders gather at midnight to bark at charts. No TA, just instincts.</p>
+    </div>
+    <div className="bg-black/60 p-5 rounded-xl border border-cyan-400">
+      <h3 className="text-lg font-bold text-cyan-300 mb-2">💀 Bonepile Betting</h3>
+      <p>Guess which rug pulls next. Winner gets bones. Losers get… bone too.</p>
+    </div>
+  </div>
+</motion.section>
+
+{/* 🎮 Chaos Game Teaser */}
+<motion.section
+  className="max-w-4xl mx-auto mt-24 text-center"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+>
+  <h2 className="text-4xl text-pink-400 font-extrabold mb-4">🎮 Enter the Chaos Arena</h2>
+  <p className="text-gray-300 mb-6">
+    A web mini-game is coming. You will dodge regulators, meme bombs, and rug pulls to survive.
+  </p>
+  <motion.div
+    className="mx-auto w-full max-w-lg rounded-xl overflow-hidden border-2 border-pink-500 shadow-lg"
+    whileHover={{ scale: 1.05 }}
+  >
+    <img
+      src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm43ZDBlOGE0eHZhbG1hdmdtcHhrY3U4MXNsNGVra3NydnczMmF1eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Sr7vO6XP6Y9PPrdsTg/giphy.gif"
+      alt="Game Teaser"
+      className="w-full h-64 object-cover"
+    />
+  </motion.div>
+</motion.section>
+
+{/* 🧠 Meme Wisdom Generator */}
+<motion.section
+  className="max-w-3xl mx-auto mt-24 bg-gradient-to-r from-cyan-700 to-blue-900 p-8 rounded-xl shadow-2xl border border-blue-400"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+>
+  <h2 className="text-3xl font-bold text-white mb-4">🧠 Meme Wisdom of the Day</h2>
+  <p className="text-white italic text-lg" id="memeWisdom">
+    "If it is too based to be true, it probably pumps."
+  </p>
+</motion.section>
+
+{/* 📜 Legend of Arbipup */}
+<motion.section
+  className="max-w-4xl mx-auto mt-24 text-center"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 1.2 }}
+>
+  <h2 className="text-4xl font-bold text-yellow-300 mb-4">📜 Legend of Arbipup</h2>
+  <motion.p
+    className="bg-black/70 p-6 rounded-lg text-white text-lg leading-relaxed border border-yellow-500 shadow-xl"
+    animate={{ opacity: [1, 0.9, 1], scale: [1, 1.02, 1] }}
+    transition={{ duration: 4, repeat: Infinity }}
+  >
+    Once, in the shadows of Arbitrum, a lone pup howled into the void...
+    The void howled back, and chaos was born. $Arbipup now roams freely,
+    gnawing cables, chasing charts, and disrupting economies.
+  </motion.p>
+</motion.section>
 
       <Footer />
     </div>
