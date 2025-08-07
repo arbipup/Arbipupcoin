@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, easeOut } from 'framer-motion';
 import { ethers } from 'ethers';
+import Confetti from 'react-confetti';
 import { supabase } from '../lib/supabaseClient';
 import claimAbi from '../abi/ClaimContract.json';
 
@@ -16,6 +17,18 @@ const sadGif = 'https://media.giphy.com/media/L5WQjD4p8IpO0/giphy.gif';
 const happySound = 'https://www.myinstants.com/media/sounds/that-was-easy.mp3';
 const sadSound = 'https://www.myinstants.com/media/sounds/sadtrombone.mp3';
 
+// Motion variants (only one declaration now)
+const cardVariants = {
+  hidden: { opacity: 0, y: 12, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: easeOut }
+  },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.25 } },
+};
+
 export default function ClaimPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
@@ -25,6 +38,14 @@ export default function ClaimPage() {
   const [claimed, setClaimed] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [txHash, setTxHash] = useState<string | null>(null);
+
+
+  // UI states
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [confettiDims, setConfettiDims] = useState<{ width: number; height: number }>({ width: 300, height: 300 });
+
+  const topRef = useRef<HTMLDivElement | null>(null);
 
   const getStep = () => {
     if (!isConnected) return 1;
@@ -43,23 +64,29 @@ export default function ClaimPage() {
   const checkEligibility = async () => {
     if (!supabase || !address) return;
 
-    const { data, error } = await supabase
-      .from('wallets')
-      .select('tx_count, claimed')
-      .eq('address', address.toLowerCase());
+    try {
+      setEligibility('unknown');
+      const { data, error } = await supabase
+        .from('wallets')
+        .select('tx_count, claimed')
+        .eq('address', address.toLowerCase());
 
-    if (error || !data || data.length === 0) {
-      setEligibility('ineligible');
-    } else {
-      const record = data[0];
-      if (record.claimed) {
-        setClaimed(true);
-        setEligibility('eligible');
-      } else if (record.tx_count < 50) {
+      if (error || !data || data.length === 0) {
         setEligibility('ineligible');
       } else {
-        setEligibility('eligible');
+        const record = data[0];
+        if (record.claimed) {
+          setClaimed(true);
+          setEligibility('eligible');
+        } else if (record.tx_count < 50) {
+          setEligibility('ineligible');
+        } else {
+          setEligibility('eligible');
+        }
       }
+    } catch (err) {
+      console.error('Eligibility check error', err);
+      setEligibility('ineligible');
     }
   };
 
@@ -69,12 +96,13 @@ export default function ClaimPage() {
     try {
       setIsClaiming(true);
       const { ethereum } = window as any;
-      if (!ethereum) throw new Error("Wallet not found");
+      if (!ethereum) throw new Error('Wallet not found');
 
       const provider = new ethers.BrowserProvider(ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, claimAbi, signer);
-      const tx = await contract.claim({ value: ethers.parseEther(CLAIM_FEE_ETH) });
+      const tx = await contract.claim({ value: ethers.parseEther(CLAIM_FEE_ETH) }); setTxHash(tx.hash);
+
 
       await tx.wait();
 
@@ -84,14 +112,16 @@ export default function ClaimPage() {
         .eq('address', address.toLowerCase());
 
       if (error) {
-        alert('✅ Claimed, but failed to update backend.');
-        return;
+        alert('✅ Claimed on-chain, but failed to update backend.');
+      } else {
+        setClaimed(true);
       }
 
-      setClaimed(true);
-      alert('🎉 Claim successful!');
+      setShowCelebration(true);
+      playSound(happySound);
     } catch (err: any) {
-      console.error("Claim error:", err);
+      console.error('Claim error:', err);
+      playSound(sadSound);
       alert('❌ Claim failed: ' + (err?.reason || err?.message || 'Unknown error'));
     } finally {
       setIsClaiming(false);
@@ -119,188 +149,363 @@ export default function ClaimPage() {
     }
   }, [isConnected]);
 
+  useEffect(() => {
+    const update = () => {
+      setConfettiDims({ width: window.innerWidth, height: window.innerHeight });
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const stepItems = [
+    { id: 1, title: 'Connect Wallet', color: '#FACC15' },
+    { id: 2, title: 'Terms & Conditions', color: '#FB7185' },
+    { id: 3, title: 'Eligibility Check', color: '#60A5FA' },
+    { id: 4, title: 'Claim Reward', color: '#34D399' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8f8f8] via-[#eeeeee] to-[#f8f8f8] text-black py-12 px-4">
-      {/* Sound Toggle */}
+    <div className="min-h-screen bg-[#050508] text-white py-10 px-6" ref={topRef}>
+      {/* SOUND TOGGLE */}
       <div className="fixed top-5 right-5 z-50">
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
-          className="text-white bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full text-sm shadow"
+          className="text-white bg-white/6 hover:bg-white/8 px-3 py-1 rounded-full text-sm shadow"
         >
           {soundEnabled ? '🔊 Sound On' : '🔇 Sound Off'}
         </button>
       </div>
 
-      {/* Step Progress */}
-      <div className="w-full max-w-4xl mx-auto mb-6">
-        <div className="flex justify-between items-center">
-          {['Connect Wallet', 'Terms & Conditions', 'Eligibility Check', 'Claim Reward'].map((label, i) => {
-            const stepNum = i + 1;
-            const isActive = currentStep === stepNum;
-            const isCompleted = currentStep > stepNum;
+      {/* Top Step Indicator */}
+      <div className="max-w-5xl mx-auto mb-8">
+        <div className="bg-white/3 rounded-xl p-6 shadow-inner border border-white/6">
+          <div className="flex items-center justify-between gap-4">
+            {stepItems.map((s, idx) => {
+              const completed = currentStep > s.id;
+              const active = currentStep === s.id;
+              return (
+                <div key={s.id} className="flex-1">
+                  <div className="flex items-center">
+                    <motion.div
+                      initial={{ scale: 0.9 }}
+                      animate={{ scale: active || completed ? 1 : 0.98 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-black font-bold`}
+                      style={{
+                        background: completed ? s.color : active ? 'linear-gradient(135deg,#ffffff,#f3f4f6)' : 'rgba(255,255,255,0.06)',
+                        boxShadow: completed ? `0 6px 24px ${s.color}40, inset 0 -6px 16px #00000080` : active ? `0 6px 20px #ffffff20` : 'none',
+                      }}
+                    >
+                      {completed ? '✓' : idx + 1}
+                    </motion.div>
 
-            return (
-              <div key={i} className="flex flex-col items-center w-full relative">
-                <div className={`rounded-full w-8 h-8 flex items-center justify-center font-bold
-                  ${isCompleted ? 'bg-green-500 text-white' : isActive ? 'bg-purple-500 text-white' : 'bg-gray-400 text-white'}`}>
-                  {isCompleted ? '✓' : stepNum}
+                    <div className="ml-4">
+                      <div className={`text-sm ${active ? 'text-white font-bold' : 'text-gray-300'}`}>{s.title}</div>
+                      <div className="text-xs text-gray-400">{completed ? 'Completed' : active ? 'Current' : 'Pending'}</div>
+                    </div>
+                  </div>
                 </div>
-                <span className={`mt-2 text-sm text-center ${isActive ? 'text-black font-semibold' : 'text-gray-500'}`}>
-                  {label}
-                </span>
-                {i < 3 && (
-                  <div className="absolute top-4 left-full w-full h-0.5 bg-gray-400 z-[-1]"></div>
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Info Text */}
-      <div className="bg-white/60 backdrop-blur rounded-lg shadow-md p-4 text-center mb-8 text-sm text-gray-800 max-w-2xl mx-auto">
-        Eligible wallets can claim <span className="text-green-700 font-bold">8000 $ArbiPup</span> tokens for a small gas fee.
-        Make sure your wallet qualifies before claiming.
+      {/* Info Card */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
+          Eligible wallets can snag <span className="text-green-400 font-bold">8000 $ArbiPup tokens </span>, Check if you are in the pack and claim your spot!.
+        </div>
       </div>
 
-      {/* Grid Layout */}
-      <div className="grid grid-cols-1 gap-6 justify-center items-start max-w-4xl mx-auto">
-        {/* Step 1: Connect */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-          <h2 className="step-title text-yellow-500">1. Connect Wallet</h2>
-          {!isConnected ? (
-            <ConnectButton />
-          ) : (
-            <>
-              <p className="text-sm mb-2">Connected: <span className="font-mono">{address?.slice(0, 6)}...{address?.slice(-4)}</span></p>
-              <button onClick={() => disconnect()} className="button-red">Disconnect</button>
-            </>
-          )}
-        </motion.div>
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Step 1 Card */}
+        <AnimatePresence>
+          <motion.div
+            key="step1"
+            initial="hidden"
+            animate="visible"
+            variants={cardVariants}
+            whileHover={{ scale: 1.02, y: -6 }}
+            className="relative p-5 rounded-2xl"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(250, 204, 21, 0.06)',
+              border: '1px solid rgba(255,255,255,0.04)',
+              minHeight: 220,
+            }}
+          >
+            <motion.div
+              whileHover={{ rotateX: 6, rotateY: -6 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 14 }}
+              className="w-full h-full"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-yellow-400 font-extrabold text-lg">1. Connect Wallet</h3>
+                  <p className="text-sm text-gray-300 mt-2">Connect your wallet to get started.</p>
+                </div>
+                <div className="text-yellow-200 font-bold"></div>
+              </div>
 
-        {/* Step 2: Terms */}
+              <div className="mt-6">
+                {!isConnected ? (
+                  <div className="w-full">
+                    <ConnectButton />
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-sm mb-2 text-gray-300">
+                      Connected: <span className="font-mono">{address?.slice(0, 6)}...{address?.slice(-4)}</span>
+                    </p>
+                    <button
+                      onClick={() => disconnect()}
+                      className="w-full py-2 rounded-lg font-semibold"
+                      style={{
+                        background: 'linear-gradient(90deg,#ff6b6b,#ef4444)',
+                        color: '#fff',
+                        boxShadow: '0 8px 30px rgba(239,68,68,0.2)',
+                      }}
+                    >
+                      Disconnect
+                    </button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Step 2 Card (visible only if connected) */}
         {isConnected && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-pink-500">2. Terms & Conditions</h2>
-            <ul className="text-sm list-disc pl-5 text-gray-600 space-y-1">
-              <li>One wallet per degen. Do not be greedy.</li>
-              <li>Only works on Arbitrum. L2 gang only.</li>
-              <li>No contract wallets. Bots, take the L.</li>
-              <li>Once you claim, that's it. No undo button.</li>
-              <li>Not financial advice. We're just having fun here.</li>
-            </ul>
-            <label className="flex items-center space-x-2 mt-3">
-              <input
-                type="checkbox"
-                checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
-                className="form-checkbox h-4 w-4 text-blue-500"
-              />
-              <span>I accept these terms</span>
-            </label>
-          </motion.div>
+          <AnimatePresence>
+            <motion.div
+              key="step2"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={cardVariants}
+              whileHover={{ scale: 1.02, y: -6 }}
+              className="relative p-5 rounded-2xl"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(251, 113, 133, 0.06)',
+                border: '1px solid rgba(255,255,255,0.04)',
+                minHeight: 220,
+              }}
+            >
+              <motion.div whileHover={{ rotateX: -4, rotateY: 4 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
+                <h3 className="text-pink-400 font-extrabold text-lg">2. Terms & Conditions</h3>
+                <ul className="text-sm list-disc pl-5 text-gray-300 space-y-1 mt-3">
+                   <li>One wallet per degen. Don it be greedy, share the love.</li>
+<li>Arbitrum only. L2 gang, we ride together.</li>
+<li>No contract wallets. Bots, take the L and touch grass.</li>
+<li>Once you claim, that is it. No undo, no refunds, no tears.</li>
+<li>Not financial advice. This is for fun, not for your retirement plan.</li>
+<li>Volatility is the game. Prices go up, down, and sideways, sometimes in the same minute.</li>
+<li>You are 100% responsible for your clicks, trades, and memes.</li>
+<li>If you lose sleep over this, maybe go outside and get some sunlight.</li>
+<li>We reserve the right to change the rules if the vibes demand it.</li>
+
+                </ul>
+
+                <label className="flex items-center space-x-2 mt-4">
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="h-4 w-4 rounded border-gray-600 bg-black/40"
+                  />
+                  <span className="text-sm">i am down with the terms, dawg, send it</span>
+                </label>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         )}
 
-        {/* Step 3: Eligibility */}
+        {/* Step 3 Card (visible if connected & agreed) */}
         {isConnected && agreed && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-blue-500">3. Eligibility Check</h2>
-            {eligibility === 'unknown' && (
-              <button onClick={checkEligibility} className="button-blue">Check Now</button>
-            )}
-            {eligibility === 'eligible' && (
-              <div className="text-center">
-                <p className="text-green-600 font-semibold mb-2">
-                  🐶 Lucky dawg, you actually made it!<br />🎯 Eligibility unlocked!
-                </p>
-                <motion.img
-                  src={happyGif}
-                  alt="Happy"
-                  className="w-40 mx-auto rounded-lg"
-                  animate={{ rotate: [-5, 5, -5] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                />
-              </div>
-            )}
-            {eligibility === 'ineligible' && (
-              <div className="text-center">
-                <p className="text-red-500 font-semibold mb-2">
-                  😵 Dawg, you missed it this time...<br />Go touch grass.
-                </p>
-                <motion.img
-                  src={sadGif}
-                  alt="Sad"
-                  className="w-40 mx-auto rounded-lg"
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                />
-              </div>
-            )}
-          </motion.div>
+          <AnimatePresence>
+            <motion.div
+              key="step3"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={cardVariants}
+              whileHover={{ scale: 1.02, y: -6 }}
+              className="relative p-5 rounded-2xl"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(96,165,250,0.06)',
+                border: '1px solid rgba(255,255,255,0.04)',
+                minHeight: 220,
+              }}
+            >
+              <motion.div whileHover={{ rotateX: 3, rotateY: -3 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
+                <h3 className="text-blue-300 font-extrabold text-lg">3. Eligibility Check</h3>
+                <p className="text-sm text-gray-300 mt-2">In this section, we will review your activity on the Arbitrum network to determine your eligibility</p>
+
+                <div className="mt-6">
+                  {eligibility === 'unknown' && (
+                    <button
+                      onClick={checkEligibility}
+                      className="w-full py-2 rounded-lg font-semibold"
+                      style={{ background: 'linear-gradient(90deg,#2563eb,#60a5fa)', color: '#fff', boxShadow: '0 8px 30px rgba(37,99,235,0.12)' }}
+                    >
+                      Check Now
+                    </button>
+                  )}
+
+                  {eligibility === 'eligible' && (
+                    <div className="text-center">
+                      <p className="text-green-400 font-semibold mb-3">Ultra-lucky dawg — the gates is wide open!</p>
+                      <motion.img
+                        src={happyGif}
+                        alt="Happy"
+                        className="w-36 mx-auto rounded-lg shadow-lg"
+                        animate={{ rotate: [-6, 6, -6] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                      />
+                    </div>
+                  )}
+
+                  {eligibility === 'ineligible' && (
+                    <div className="text-center">
+                      <p className="text-red-400 font-semibold mb-3">😵 Dawg, no luck today. Maybe find a job? 😂 Just kidding, catch us next time.</p>
+                      <motion.img
+                        src={sadGif}
+                        alt="Sad"
+                        className="w-36 mx-auto rounded-lg"
+                        animate={{ y: [0, -6, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.2 }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         )}
 
-        {/* Step 4: Claim */}
+        {/* Step 4 Card (visible when eligible) */}
         {isConnected && agreed && eligibility === 'eligible' && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-green-600">4. Claim Reward</h2>
-            {!claimed ? (
-              <button
-                onClick={handleClaim}
-                disabled={isClaiming}
-                className="button-green"
-              >
-                {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
-              </button>
-            ) : (
-              <p className="text-center text-green-600 font-semibold">
-                🎉 Already claimed!<br />🐾 Check your wallet.
-              </p>
-            )}
-          </motion.div>
+          <AnimatePresence>
+            <motion.div
+              key="step4"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={cardVariants}
+              whileHover={{ scale: 1.02, y: -6 }}
+              className="relative p-5 rounded-2xl"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(52,211,153,0.06)',
+                border: '1px solid rgba(255,255,255,0.04)',
+                minHeight: 220,
+              }}
+            >
+              <motion.div whileHover={{ rotateX: -4, rotateY: -6 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
+                <h3 className="text-green-300 font-extrabold text-lg">4. Claim Reward</h3>
+                <p className="text-sm text-gray-300 mt-2">Snag your tokens, dawg, just cover the gas.</p>
+
+                <div className="mt-6">
+                  {!claimed ? (
+                    <button
+                      onClick={handleClaim}
+                      disabled={isClaiming}
+                      className="w-full py-2 rounded-lg font-semibold"
+                      style={{
+                        background: 'linear-gradient(90deg,#16a34a,#34d399)',
+                        color: '#fff',
+                        boxShadow: '0 8px 30px rgba(16,185,129,0.12)',
+                      }}
+                    >
+                      {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
+                    </button>
+                  ) : (
+                    <div className="text-center text-green-400 font-semibold">
+                      <div>🎉 Already claimed! What now, dawg, trying to take the whole supply?</div>
+                      <div className="text-sm text-gray-300 mt-1">Check your wallet.</div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         )}
       </div>
 
-      {/* Styles */}
+      {/* Celebration Modal */}
+      <AnimatePresence>
+        {showCelebration && (
+          <>
+            <motion.div
+              key="modal-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+              onClick={() => setShowCelebration(false)}
+            />
+
+            <motion.div
+              key="modal"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              className="fixed z-60 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0b0b0c] border border-white/8 rounded-2xl shadow-2xl w-full max-w-lg p-6"
+            >
+              {/* confetti canvas */}
+              <Confetti width={confettiDims.width} height={confettiDims.height} numberOfPieces={350} recycle={false} />
+
+              <div className="flex items-start justify-between">
+                <div>
+                  <h2 className="text-2xl font-extrabold text-white">🎉 Bag secured, dawg!</h2>
+                  <p className="text-sm text-gray-300 mt-2">You bagged 8,000 $ArbiPup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
+                </div>
+
+                <button
+                  onClick={() => setShowCelebration(false)}
+                  className="ml-4 rounded-full p-2"
+                  style={{ background: 'rgba(255,255,255,0.04)' }}
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="mt-5 flex gap-3">
+                 <a
+  href={txHash ? `https://arbiscan.io/tx/${txHash}` : '#'}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex-1 text-center py-2 rounded-lg font-semibold"
+  style={{ background: 'linear-gradient(90deg,#f97316,#fb923c)', color: '#fff' }}
+>
+  View on Explorer
+</a>
+
+                <button
+                  onClick={() => setShowCelebration(false)}
+                  className="flex-1 py-2 rounded-lg font-semibold"
+                  style={{ background: 'linear-gradient(90deg,#06b6d4,#0891b2)', color: '#fff' }}
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Extra Styles (Tailwind + inline for glows where needed) */}
       <style jsx>{`
-        .step-card {
-          background: #ffffff;
-          border: 1px solid #ddd;
-          border-radius: 1rem;
-          padding: 1.5rem;
-          min-height: 300px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-        .step-title {
-          font-size: 1.5rem;
-          font-weight: 800;
-          margin-bottom: 0.75rem;
-        }
-        .button-blue {
-          background: #3b82f6;
-          color: white;
-          font-weight: bold;
-          padding: 0.6rem 1rem;
-          border-radius: 0.75rem;
-          width: 100%;
-        }
-        .button-red {
-          background: #ef4444;
-          color: white;
-          font-weight: bold;
-          padding: 0.6rem 1rem;
-          border-radius: 0.75rem;
-          width: 100%;
-        }
-        .button-green {
-          background: #22c55e;
-          color: white;
-          font-weight: bold;
-          padding: 0.6rem 1rem;
-          border-radius: 0.75rem;
-          width: 100%;
+        /* subtle animated neon border for the whole page (keeps theme) */
+        ::selection {
+          background: rgba(255, 255, 255, 0.06);
         }
       `}</style>
     </div>
