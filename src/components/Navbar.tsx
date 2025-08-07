@@ -23,7 +23,7 @@ export default function Navbar() {
           href="/claim" 
           className="px-2 sm:px-3 py-1 bg-arbiblue rounded-lg font-bold hover:bg-blue-400 transition text-sm sm:text-base"
         >
-          Claim
+          Airdrop
         </Link>
         <a 
           href="https://x.com/arbipupcoin" 
