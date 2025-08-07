@@ -215,7 +215,7 @@ export default function ClaimPage() {
       {/* Info Card */}
       <div className="max-w-4xl mx-auto mb-8">
         <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
-          Eligible wallets can snag <span className="text-green-400 font-bold">8000 $ArbiPup tokens </span>, Check if you are in the pack and claim your spot!.
+          Eligible wallets can snag <span className="text-green-400 font-bold">8000 $Arbipup tokens </span>, Check if you are in the pack and claim your spot!.
         </div>
       </div>
 
@@ -360,7 +360,7 @@ export default function ClaimPage() {
 
                   {eligibility === 'eligible' && (
                     <div className="text-center">
-                      <p className="text-green-400 font-semibold mb-3">Ultra-lucky dawg — the gates is wide open!</p>
+                      <p className="text-green-400 font-semibold mb-3">Ultra-lucky dawg, the gates is wide open!</p>
                       <motion.img
                         src={happyGif}
                         alt="Happy"
@@ -373,7 +373,7 @@ export default function ClaimPage() {
 
                   {eligibility === 'ineligible' && (
                     <div className="text-center">
-                      <p className="text-red-400 font-semibold mb-3">😵 Dawg, no luck today. Maybe find a job? 😂 Just kidding, catch us next time.</p>
+                      <p className="text-red-400 font-semibold mb-3">😵 Dawg, no luck today. Maybe go get a job? 😂 Just kidding, catch us next time.</p>
                       <motion.img
                         src={sadGif}
                         alt="Sad"
@@ -423,7 +423,7 @@ export default function ClaimPage() {
                         boxShadow: '0 8px 30px rgba(16,185,129,0.12)',
                       }}
                     >
-                      {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
+                      {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup`}
                     </button>
                   ) : (
                     <div className="text-center text-green-400 font-semibold">
