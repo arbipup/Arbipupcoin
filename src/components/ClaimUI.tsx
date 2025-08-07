@@ -178,39 +178,43 @@ export default function ClaimPage() {
       </div>
 
       {/* Top Step Indicator */}
-      <div className="max-w-5xl mx-auto mb-8">
-        <div className="bg-white/3 rounded-xl p-6 shadow-inner border border-white/6">
-          <div className="flex items-center justify-between gap-4">
-            {stepItems.map((s, idx) => {
-              const completed = currentStep > s.id;
-              const active = currentStep === s.id;
-              return (
-                <div key={s.id} className="flex-1">
-                  <div className="flex items-center">
-                    <motion.div
-                      initial={{ scale: 0.9 }}
-                      animate={{ scale: active || completed ? 1 : 0.98 }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-black font-bold`}
-                      style={{
-                        background: completed ? s.color : active ? 'linear-gradient(135deg,#ffffff,#f3f4f6)' : 'rgba(255,255,255,0.06)',
-                        boxShadow: completed ? `0 6px 24px ${s.color}40, inset 0 -6px 16px #00000080` : active ? `0 6px 20px #ffffff20` : 'none',
-                      }}
-                    >
-                      {completed ? '✓' : idx + 1}
-                    </motion.div>
+      {/* Step indicator container */}
+<div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 overflow-x-auto">
+  {stepItems.map((s, idx) => {
+    const completed = currentStep > s.id;
+    const active = currentStep === s.id;
+    return (
+      <div key={s.id} className="flex-1 min-w-[120px] sm:min-w-0">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+          {/* Step circle */}
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: active || completed ? 1 : 0.98 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-black font-bold`}
+            style={{
+              background: completed ? s.color : active ? 'linear-gradient(135deg,#ffffff,#f3f4f6)' : 'rgba(255,255,255,0.06)',
+              boxShadow: completed ? `0 6px 24px ${s.color}40, inset 0 -6px 16px #00000080` : active ? `0 6px 20px #ffffff20` : 'none',
+            }}
+          >
+            {completed ? '✓' : idx + 1}
+          </motion.div>
 
-                    <div className="ml-4">
-                      <div className={`text-sm ${active ? 'text-white font-bold' : 'text-gray-300'}`}>{s.title}</div>
-                      <div className="text-xs text-gray-400">{completed ? 'Completed' : active ? 'Current' : 'Pending'}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          {/* Step text */}
+          <div className="mt-2 sm:mt-0 sm:ml-4">
+            <div className={`text-xs sm:text-sm ${active ? 'text-white font-bold' : 'text-gray-300'}`}>
+              {s.title}
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400">
+              {completed ? 'Completed' : active ? 'Current' : 'Pending'}
+            </div>
           </div>
         </div>
       </div>
+    );
+  })}
+</div>
+
 
       {/* Info Card */}
       <div className="max-w-4xl mx-auto mb-8">
