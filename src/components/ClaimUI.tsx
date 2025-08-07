@@ -26,6 +26,14 @@ export default function ClaimPage() {
   const [isClaiming, setIsClaiming] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
+  const getStep = () => {
+    if (!isConnected) return 1;
+    if (!agreed) return 2;
+    if (eligibility !== 'eligible') return 3;
+    return 4;
+  };
+  const currentStep = getStep();
+
   const resetFlow = () => {
     setAgreed(false);
     setEligibility('unknown');
@@ -112,9 +120,9 @@ export default function ClaimPage() {
   }, [isConnected]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#141414] to-[#0a0a0a] text-white py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f8f8] via-[#eeeeee] to-[#f8f8f8] text-black py-12 px-4">
       {/* Sound Toggle */}
-      <div className="fixed top-5 right-5">
+      <div className="fixed top-5 right-5 z-50">
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
           className="text-white bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-full text-sm shadow"
@@ -123,11 +131,43 @@ export default function ClaimPage() {
         </button>
       </div>
 
+      {/* Step Progress */}
+      <div className="w-full max-w-4xl mx-auto mb-6">
+        <div className="flex justify-between items-center">
+          {['Connect Wallet', 'Terms & Conditions', 'Eligibility Check', 'Claim Reward'].map((label, i) => {
+            const stepNum = i + 1;
+            const isActive = currentStep === stepNum;
+            const isCompleted = currentStep > stepNum;
+
+            return (
+              <div key={i} className="flex flex-col items-center w-full relative">
+                <div className={`rounded-full w-8 h-8 flex items-center justify-center font-bold
+                  ${isCompleted ? 'bg-green-500 text-white' : isActive ? 'bg-purple-500 text-white' : 'bg-gray-400 text-white'}`}>
+                  {isCompleted ? '✓' : stepNum}
+                </div>
+                <span className={`mt-2 text-sm text-center ${isActive ? 'text-black font-semibold' : 'text-gray-500'}`}>
+                  {label}
+                </span>
+                {i < 3 && (
+                  <div className="absolute top-4 left-full w-full h-0.5 bg-gray-400 z-[-1]"></div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Info Text */}
+      <div className="bg-white/60 backdrop-blur rounded-lg shadow-md p-4 text-center mb-8 text-sm text-gray-800 max-w-2xl mx-auto">
+        Eligible wallets can claim <span className="text-green-700 font-bold">8000 $ArbiPup</span> tokens for a small gas fee.
+        Make sure your wallet qualifies before claiming.
+      </div>
+
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 justify-center items-start max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 gap-6 justify-center items-start max-w-4xl mx-auto">
         {/* Step 1: Connect */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-          <h2 className="step-title text-yellow-400">1. Connect Wallet</h2>
+          <h2 className="step-title text-yellow-500">1. Connect Wallet</h2>
           {!isConnected ? (
             <ConnectButton />
           ) : (
@@ -141,8 +181,8 @@ export default function ClaimPage() {
         {/* Step 2: Terms */}
         {isConnected && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-pink-300">2. Terms & Conditions</h2>
-            <ul className="text-sm list-disc pl-5 text-gray-300 space-y-1">
+            <h2 className="step-title text-pink-500">2. Terms & Conditions</h2>
+            <ul className="text-sm list-disc pl-5 text-gray-600 space-y-1">
               <li>One wallet per degen. Do not be greedy.</li>
               <li>Only works on Arbitrum. L2 gang only.</li>
               <li>No contract wallets. Bots, take the L.</li>
@@ -164,13 +204,13 @@ export default function ClaimPage() {
         {/* Step 3: Eligibility */}
         {isConnected && agreed && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-blue-300">3. Eligibility Check</h2>
+            <h2 className="step-title text-blue-500">3. Eligibility Check</h2>
             {eligibility === 'unknown' && (
               <button onClick={checkEligibility} className="button-blue">Check Now</button>
             )}
             {eligibility === 'eligible' && (
               <div className="text-center">
-                <p className="text-green-400 font-semibold mb-2">
+                <p className="text-green-600 font-semibold mb-2">
                   🐶 Lucky dawg, you actually made it!<br />🎯 Eligibility unlocked!
                 </p>
                 <motion.img
@@ -184,7 +224,7 @@ export default function ClaimPage() {
             )}
             {eligibility === 'ineligible' && (
               <div className="text-center">
-                <p className="text-red-400 font-semibold mb-2">
+                <p className="text-red-500 font-semibold mb-2">
                   😵 Dawg, you missed it this time...<br />Go touch grass.
                 </p>
                 <motion.img
@@ -202,7 +242,7 @@ export default function ClaimPage() {
         {/* Step 4: Claim */}
         {isConnected && agreed && eligibility === 'eligible' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="step-card">
-            <h2 className="step-title text-green-300">4. Claim Reward</h2>
+            <h2 className="step-title text-green-600">4. Claim Reward</h2>
             {!claimed ? (
               <button
                 onClick={handleClaim}
@@ -212,7 +252,7 @@ export default function ClaimPage() {
                 {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
               </button>
             ) : (
-              <p className="text-center text-green-300 font-semibold">
+              <p className="text-center text-green-600 font-semibold">
                 🎉 Already claimed!<br />🐾 Check your wallet.
               </p>
             )}
@@ -223,12 +263,12 @@ export default function ClaimPage() {
       {/* Styles */}
       <style jsx>{`
         .step-card {
-          background: rgba(0, 0, 0, 0.6);
-          border: 1px solid #333;
+          background: #ffffff;
+          border: 1px solid #ddd;
           border-radius: 1rem;
           padding: 1.5rem;
           min-height: 300px;
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
