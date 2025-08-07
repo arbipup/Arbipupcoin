@@ -214,14 +214,13 @@ export default function ClaimPage() {
     );
   })}
 </div>
-
-
       {/* Info Card */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
-          Eligible wallets can snag <span className="text-green-400 font-bold">8000 $Arbipup tokens </span>, Check if you are in the pack and claim your spot!.
-        </div>
-      </div>
+<div className="max-w-4xl mx-auto mt-8 mb-8">
+  <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
+    Eligible wallets can snag <span className="text-green-400 font-bold">8000 $Arbipup tokens </span>, Check if you are in the pack and claim your spot!.
+  </div>
+</div>
+
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
