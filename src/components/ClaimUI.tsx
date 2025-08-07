@@ -17,7 +17,7 @@ export default function ClaimPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-md">
-          Eligibilty check, claim and TGE soon 🐶🔥
+         Eligibility check? ✅ Claim soon. TGE loading... 🐶🔥 Stay degenerate
         </h1>
         <p className="text-lg text-gray-300 max-w-md mx-auto">
           Connect your wallet and see if you're part of the chosen ones.

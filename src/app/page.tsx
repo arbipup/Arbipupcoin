@@ -58,12 +58,12 @@ export default function Home() {
 
           <motion.p
   className="bg-black/60 p-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-xl mx-auto">
-  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span>   
+  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span>,   
   the unhinged memecoin born from <span className="text-pink-400 font-extrabold">pure chaos</span>,  
   unleashed on <span className="text-cyan-300 font-extrabold">Arbitrum</span>.
   <br />
   <span className="italic text-gray-300">
-    No roadmap. No promises. No mercy. Just absolute, feral, tail-wagging mayhem.
+    No roadmap. No promises. Just absolute chaos, feral, tail-wagging mayhem.
   </span>
 
   <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
