@@ -15,10 +15,20 @@ export default function ClaimPage() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 
+  const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
+
+  // === STEP CONTROL ===
+  const currentStep = !agreed
+    ? 0
+    : !isConnected
+    ? 1
+    : !submitted
+    ? 2
+    : 3;
 
   useEffect(() => {
     const fetchStartTime = async () => {
@@ -28,10 +38,7 @@ export default function ClaimPage() {
         .eq('key', 'airdrop')
         .single();
 
-      if (error) {
-        console.error('Timer fetch error:', error);
-        return;
-      }
+      if (error) return;
 
       if (data?.starts_at) {
         const startTime = new Date(data.starts_at).getTime();
@@ -115,57 +122,104 @@ export default function ClaimPage() {
     return `${hrs}:${mins}:${secs}`;
   };
 
+  const steps = ['Agree to Terms', 'Connect Wallet', 'Submit Wallet', 'Done'];
+
   return (
-    <div className="relative min-h-screen text-white flex flex-col overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-[#100417] to-[#0c0c0c] text-white relative overflow-hidden">
       <Navbar />
       <AudioPlayer />
 
-      {/* Background grid */}
-      <div className="fixed inset-0 -z-10 grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2 opacity-30 animate-color-cycle">
-        {Array.from({ length: 70 }).map((_, i) => (
-          <motion.img
-            key={i}
-            src="https://media.giphy.com/media/GDC2INSW9bAwFGwyK8/giphy.gif"
-            alt="bg"
-            className="w-full h-full object-cover rounded-lg"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.02 }}
-          />
+      {/* Step Indicator */}
+      <div className="flex justify-center space-x-6 mt-24 mb-10 z-10">
+        {steps.map((step, index) => (
+          <div key={index} className="flex flex-col items-center">
+            <div
+              className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-bold transition ${
+                index <= currentStep
+                  ? 'bg-purple-600 border-purple-400'
+                  : 'bg-gray-800 border-gray-600 text-gray-400'
+              }`}
+            >
+              {index + 1}
+            </div>
+            <span
+              className={`mt-2 text-xs sm:text-sm ${
+                index <= currentStep ? 'text-white' : 'text-gray-500'
+              }`}
+            >
+              {step}
+            </span>
+          </div>
         ))}
       </div>
 
-      <main className="flex-grow pt-28 px-6 space-y-16 relative z-10 text-center">
+      <main className="flex-grow px-6 relative z-10">
         <motion.div
-          className="max-w-md mx-auto p-4 bg-black/40 backdrop-blur-md border border-purple-500 rounded-xl shadow-xl"
-          initial={{ scale: 0.9, rotate: -2, opacity: 0 }}
-          animate={{ scale: 1, rotate: 0, opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="max-w-2xl mx-auto bg-black/60 backdrop-blur-md border border-purple-700 rounded-2xl p-8 shadow-2xl space-y-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          <h1 className="text-xl sm:text-2xl font-semibold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-relaxed">
-            ⚡️ Chaos is coming to Arbitrum. Lock in your wallet before the storm hits!
-          </h1>
-        </motion.div>
+          {/* Intro Header */}
+          <motion.h1
+            className="text-2xl sm:text-3xl font-extrabold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            🐶 Arbipup Airdrop, Lock In Your Wallet
+          </motion.h1>
 
-        {remainingTime !== null && remainingTime > 0 && (
-          <div className="text-2xl font-bold text-cyan-300 bg-black/60 py-2 px-6 inline-block rounded-xl border border-cyan-500 shadow-md">
-            ⏳ Time Left: {formatTime(remainingTime)}
+          {/* Timer */}
+          {remainingTime !== null && remainingTime > 0 && (
+            <div className="text-center text-lg font-mono bg-black/40 py-2 px-6 inline-block rounded-xl border border-cyan-500 text-cyan-300 shadow-md">
+              ⏳ Time Left: {formatTime(remainingTime)}
+            </div>
+          )}
+
+          {/* Terms & Eligibility */}
+          <div className="space-y-4 text-sm sm:text-base text-left">
+            <h2 className="text-purple-400 font-semibold">Eligibility Criteria:</h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Interacted with Arbitrum between <strong>Apr 11, 2024 – Apr 11, 2025</strong></li>
+              <li>Snapshot: <strong>Apr 11, 2025 – 00:00 UTC</strong></li>
+              <li>Eligibility is <strong>not automatic you must register your wallet </strong></li>
+              <li>Ends after <strong>3 days</strong> or <strong>300k wallets</strong></li>
+            </ul>
+
+            <label className="flex items-start space-x-2 mt-4 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-1 w-5 h-5 accent-purple-500"
+              />
+              <span>
+                I agree that this submission reflects my own decision, and eligibility will be determined by the Arbipup team.
+              </span>
+            </label>
           </div>
-        )}
 
-        <div className="max-w-xl mx-auto bg-black/70 rounded-2xl p-8 border border-white/20 shadow-lg">
-          {!isConnected ? (
-            <div className="mb-6 flex justify-center">
+          {/* Connect Wallet */}
+          {!isConnected && agreed && (
+            <div className="flex justify-center">
               <ConnectButton showBalance={false} chainStatus="icon" />
             </div>
-          ) : (
-            <>
-              <p className="text-green-400 mb-2">
+          )}
+
+          {!isConnected && !agreed && (
+            <p className="text-center text-red-400">Please agree to the terms to proceed.</p>
+          )}
+
+          {/* After Connected */}
+          {isConnected && (
+            <div className="text-center space-y-4">
+              <p className="text-green-400">
                 Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
               </p>
               <button
                 onClick={() => disconnect()}
-                className="mb-4 px-4 py-2 bg-red-600 rounded-xl font-semibold hover:bg-red-700"
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-semibold"
               >
                 Disconnect
               </button>
@@ -173,7 +227,7 @@ export default function ClaimPage() {
               <button
                 onClick={handleSubmit}
                 disabled={submitted || loading}
-                className={`py-3 px-6 rounded-xl font-bold transition ${
+                className={`w-full py-3 rounded-xl font-bold transition ${
                   submitted
                     ? 'bg-green-600 cursor-default'
                     : 'bg-gradient-to-r from-blue-500 to-cyan-400 hover:scale-105'
@@ -181,28 +235,36 @@ export default function ClaimPage() {
               >
                 {submitted ? '✅ Wallet Submitted' : loading ? 'Submitting...' : 'Submit Wallet'}
               </button>
-            </>
+
+              {error && <p className="text-red-500">{error}</p>}
+            </div>
           )}
 
-          {error && <p className="text-red-500 mt-4">{error}</p>}
-
+          {/* Success */}
           {isConnected && submitted && (
-            <div className="mt-8 flex flex-col items-center justify-center space-y-4">
-              <p className="text-xl font-bold px-4 py-2 bg-gradient-to-r from-pink-600 via-purple-500 to-blue-500 text-white rounded-xl shadow-lg">
-                🎉 Success! Your wallet is locked in. Stay tuned for the next phase.
+            <motion.div
+              className="mt-6 text-center space-y-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-lg font-semibold text-green-400">
+                🎉 Success! Your wallet is locked in. Stay tuned for next phase!.
               </p>
               <motion.img
-                src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjJzamxwOTRtYm5lamM3YWE2c3R3cWpwZ2ZkaDIwMWlmN3VhbWJjeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/jp2KXzsPtoKFG/giphy.gif"
+                src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
                 alt="Success GIF"
-                className="w-48 rounded-xl shadow-xl"
+                className="mx-auto w-48 rounded-xl shadow-lg"
                 animate={{ rotate: [-5, 5, -5] }}
                 transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
               />
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        <ClaimFlow />
+        <div className="mt-16">
+          <ClaimFlow />
+        </div>
       </main>
 
       <Footer />
