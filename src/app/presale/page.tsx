@@ -6,7 +6,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from "@/lib/supabaseClient";
+
 import axios from 'axios';
 
 import {
@@ -17,10 +18,6 @@ import {
 } from "ethers";
 
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 // ====== CONFIG ======
 const PRESALE_ADDRESS = "0x0553B6c290b7978Fb44154aCC7B89085F129929b";
