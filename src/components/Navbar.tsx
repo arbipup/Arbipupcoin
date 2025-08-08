@@ -19,12 +19,21 @@ export default function Navbar() {
       {/* Links & Icons */}
       <div className="flex items-center gap-3 sm:gap-6 text-sm sm:text-base">
         <Link href="/" className="hover:text-arbiblue">Home</Link>
+
         <Link 
           href="/claim" 
           className="px-2 sm:px-3 py-1 bg-arbiblue rounded-lg font-bold hover:bg-blue-400 transition text-sm sm:text-base"
         >
           Airdrop
         </Link>
+
+        <Link 
+          href="/presale" 
+          className="px-2 sm:px-3 py-1 bg-green-500 rounded-lg font-bold hover:bg-green-400 transition text-sm sm:text-base"
+        >
+          Presale
+        </Link>
+
         <a 
           href="https://x.com/arbipupcoin" 
           target="_blank" 

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { Providers } from "@/providers"; // ✅ make sure this path matches your file
+import { Providers } from "@/providers";
+import Navbar from "@/components/Navbar"; // ✅ adjust the path if needed
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: "Arbipup",
   description: "Claim your Airdrop",
   icons: {
-    icon: "/favicon.png", // ✅ This points to your uploaded image in /public
+    icon: "/favicon.png",
   },
 };
 
@@ -32,7 +33,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar /> {/* ✅ Now Navbar is part of every page */}
+          {children}
+        </Providers>
       </body>
     </html>
   );
