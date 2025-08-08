@@ -3,12 +3,18 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// ✅ Hardcoded for Free Plan
+const SUPABASE_URL = 'https://iwshxkqeqidrlkvraekj.supabase.co';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3c2h4a3FlcWlkcmxrdnJhZWtqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0MzQzNTMsImV4cCI6MjA3MDAxMDM1M30.4GwNDe1iAbWhTOhkEjGpBz4vGHbz0yP6sWOYMa6bsOs';
+
+// ✅ Create client safely inside function
+function getSupabaseClient() {
+  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
 
 export async function POST(req: Request) {
+  const supabase = getSupabaseClient();
   const body = await req.json();
 
   const {
@@ -19,7 +25,6 @@ export async function POST(req: Request) {
     tx_hash
   } = body;
 
-  // Insert purchase
   const { error: insertError } = await supabase.from('purchases').insert({
     wallet_address,
     tokens_bought,
@@ -33,7 +38,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: insertError.message }, { status: 500 });
   }
 
-  // Update stats
   const { data: statsRow, error: fetchError } = await supabase
     .from('presale_stats')
     .select('*')
@@ -65,6 +69,8 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
+  const supabase = getSupabaseClient();
+
   const { data: stats, error } = await supabase
     .from('presale_stats')
     .select('*')
