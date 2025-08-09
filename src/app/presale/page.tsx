@@ -264,8 +264,8 @@ const userPurchasedDisplay = userPurchasedTokensRaw
                 </div>
               </div>
               <div className="mt-4 text-sm text-gray-300">
-                <p><strong>Your on-chain purchases:</strong> {userPurchasedDisplay} Arbipup</p>
-                <p><strong>Your on-chain purchase:</strong> ${supabasePurchased} USDT/USDC</p>
+                <p><strong>Total Purchased:</strong> {userPurchasedDisplay} Arbipup</p>
+                <p><strong>Total Purchased:</strong> ${supabasePurchased}</p>
                 <p className="mt-2">Min per wallet: <strong>${MIN_USD}</strong> — Max per wallet: <strong>${MAX_USD}</strong></p>
               </div>
             </div>
@@ -283,9 +283,9 @@ const userPurchasedDisplay = userPurchasedTokensRaw
                 <h3 className="font-bold mb-2">Terms & Conditions</h3>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>No refunds after purchase.</li>
-                  <li>Tokens distributed after presale ends.</li>
+                  <li>Tokens distributed after purchase, but paused until listing.</li>
                   <li>Purchase limits apply per wallet.</li>
-                  <li>Participation restricted to eligible countries.</li>
+                  <li>I participate at my own risk.</li>
                   <li>By purchasing, you agree to our policies.</li>
                 </ul>
               </div>
