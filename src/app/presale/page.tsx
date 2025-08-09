@@ -146,7 +146,7 @@ export default function PresalePage() {
     fetchSupabasePurchases();
   }, [address, txHash]);
 
-  const userPurchasedDisplay = userPurchasedRaw ? formatUnits(userPurchasedRaw, STABLE_DECIMALS) : "0";
+  const userPurchasedDisplay = userPurchasedRaw ? formatUnits(userPurchasedRaw, TOKEN_DECIMALS) : "0";
   const tokensSoldDisplay = tokensSoldRaw ? formatUnits(tokensSoldRaw, TOKEN_DECIMALS) : "0";
   const presaleCapDisplay = presaleCapRaw ? formatUnits(presaleCapRaw, TOKEN_DECIMALS) : "0";
   const tokenSupplyDisplay = tokenTotalSupplyRaw ? formatUnits(tokenTotalSupplyRaw, TOKEN_DECIMALS) : "0";
@@ -255,8 +255,8 @@ export default function PresalePage() {
                 </div>
               </div>
               <div className="mt-4 text-sm text-gray-300">
-                <p><strong>Your on-chain purchases:</strong> {userPurchasedDisplay} USDT/USDC</p>
-                <p><strong>Your total in Supabase:</strong> ${supabasePurchased}</p>
+                <p><strong>Your on-chain purchases:</strong> {userPurchasedDisplay} Arbipup</p>
+                <p><strong>Your on-chain purchase:</strong> ${supabasePurchased} USDT/USDC</p>
                 <p className="mt-2">Min per wallet: <strong>${MIN_USD}</strong> — Max per wallet: <strong>${MAX_USD}</strong></p>
               </div>
             </div>
