@@ -46,6 +46,9 @@ export default function PresalePage() {
   const chainId = useChainId();
   // Map common chain IDs to readable names
  const [hasMounted, setHasMounted] = useState(false); // 👈 NEW
+ useEffect(() => {
+  setHasMounted(true);
+}, []);
 
   const [stable, setStable] = useState<"USDT" | "USDC">("USDT");
   const [inputAmount, setInputAmount] = useState("");
