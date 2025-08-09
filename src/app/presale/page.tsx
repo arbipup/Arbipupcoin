@@ -146,7 +146,16 @@ export default function PresalePage() {
     fetchSupabasePurchases();
   }, [address, txHash]);
 
-  const userPurchasedDisplay = userPurchasedRaw ? formatUnits(userPurchasedRaw, TOKEN_DECIMALS) : "0";
+  // convert on-chain stored stable units (USDT/USDC, 6 decimals) into token smallest units
+const userPurchasedTokensRaw = userPurchasedRaw
+  ? (userPurchasedRaw * (10n ** BigInt(TOKEN_DECIMALS))) / PRICE_MICRO
+  : null;
+
+// display as human-readable Arbipup tokens
+const userPurchasedDisplay = userPurchasedTokensRaw
+  ? formatUnits(userPurchasedTokensRaw, TOKEN_DECIMALS)
+  : "0";
+
   const tokensSoldDisplay = tokensSoldRaw ? formatUnits(tokensSoldRaw, TOKEN_DECIMALS) : "0";
   const presaleCapDisplay = presaleCapRaw ? formatUnits(presaleCapRaw, TOKEN_DECIMALS) : "0";
   const tokenSupplyDisplay = tokenTotalSupplyRaw ? formatUnits(tokenTotalSupplyRaw, TOKEN_DECIMALS) : "0";
