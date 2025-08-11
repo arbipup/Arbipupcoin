@@ -1,5 +1,3 @@
-Last claim update "Commit"
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
