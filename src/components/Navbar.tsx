@@ -4,6 +4,7 @@ import { FaTwitter, FaTelegram } from "react-icons/fa";
 
 export default function Navbar() {
   const presaleActive = false; // change to true when you want Presale visible
+  const claimActive = false;   // change to true when you want Airdrop visible
 
   return (
     <nav className="fixed top-0 left-0 w-full flex flex-wrap justify-between items-center px-3 sm:px-6 py-2 bg-black/60 backdrop-blur-md z-50 text-white">
@@ -22,12 +23,14 @@ export default function Navbar() {
       <div className="flex items-center gap-2 sm:gap-6 text-xs sm:text-base mt-2 sm:mt-0">
         <Link href="/" className="hover:text-arbiblue">Home</Link>
 
-        <Link 
-          href="/claim" 
-          className="px-2 sm:px-3 py-1 bg-arbiblue rounded-lg font-bold hover:bg-blue-400 transition text-xs sm:text-base"
-        >
-          Airdrop
-        </Link>
+        {claimActive && (
+          <Link 
+            href="/claim" 
+            className="px-2 sm:px-3 py-1 bg-arbiblue rounded-lg font-bold hover:bg-blue-400 transition text-xs sm:text-base"
+          >
+            Airdrop
+          </Link>
+        )}
 
         {presaleActive && (
           <Link 
@@ -58,5 +61,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-
