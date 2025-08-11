@@ -95,14 +95,14 @@ export default function Home() {
 </motion.a>
 
             <motion.a
-              href="https://www.arbipup.fun"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="bg-gradient-to-r from-green-400 to-lime-400 text-black font-bold py-3 px-8 rounded-xl shadow-lg animate-pulse"
-            >
-              🛒 Buy $Arbipup
-            </motion.a>
+  href="#"
+  onClick={(e) => e.preventDefault()}
+  whileHover={{ scale: 1 }}
+  className="bg-gray-600 text-gray-300 font-bold py-3 px-8 rounded-xl shadow-lg opacity-50 cursor-not-allowed"
+>
+  🛒 Buy $Arbipup (Coming Soon)
+</motion.a>
+
           </div>
         </section>
 
