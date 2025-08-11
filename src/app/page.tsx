@@ -65,22 +65,25 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="bg-black/60 p-6 mt-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span>, the unhinged memecoin born from{" "}
-            <span className="text-pink-400 font-extrabold">pure chaos</span>, unleashed on{" "}
-            <span className="text-cyan-300 font-extrabold">Arbitrum</span>.
-            <br />
-            <span className="italic text-gray-300">
-              No roadmap. No promises. Just feral, tail-wagging mayhem.
-            </span>
-            <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
-              Disclaimer: $Arbipup has no intrinsic value, no roadmap, and no expectation of profit.
-            </span>
-          </motion.p>
+  className="bg-black/60 p-6 mt-6 rounded-2xl shadow-xl text-white text-lg leading-relaxed max-w-2xl"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.4 }}
+>
+  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span> – the wild memecoin puppy 
+  let loose on <span className="text-cyan-300 font-extrabold">Arbitrum</span>.  
+  <br />
+  <span className="text-pink-400 font-extrabold">Born from pure chaos.</span> 
+  Fueled by bad ideas and good vibes.  
+  <br />
+  <span className="italic text-gray-300">
+    No roadmap. No promises. Just vibes and woofs.
+  </span>
+  <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
+    Disclaimer: $Arbipup is for memes only. No value, no guarantees. Just internet dog energy.
+  </span>
+</motion.p>
+
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
