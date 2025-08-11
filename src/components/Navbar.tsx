@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaTwitter, FaTelegram } from "react-icons/fa";
 
 export default function Navbar() {
-  const presaleActive = false; // change to true when you want Presale visible
+  const presaleActive = true; // change to true when you want Presale visible
 
   return (
     <nav className="fixed top-0 left-0 w-full flex flex-wrap justify-between items-center px-3 sm:px-6 py-2 bg-black/60 backdrop-blur-md z-50 text-white">
