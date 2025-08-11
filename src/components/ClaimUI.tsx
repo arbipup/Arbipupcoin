@@ -1,3 +1,5 @@
+Last claim update "Commit"
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -178,46 +180,49 @@ export default function ClaimPage() {
       </div>
 
       {/* Top Step Indicator */}
-      <div className="max-w-5xl mx-auto mb-8">
-        <div className="bg-white/3 rounded-xl p-6 shadow-inner border border-white/6">
-          <div className="flex items-center justify-between gap-4">
-            {stepItems.map((s, idx) => {
-              const completed = currentStep > s.id;
-              const active = currentStep === s.id;
-              return (
-                <div key={s.id} className="flex-1">
-                  <div className="flex items-center">
-                    <motion.div
-                      initial={{ scale: 0.9 }}
-                      animate={{ scale: active || completed ? 1 : 0.98 }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-black font-bold`}
-                      style={{
-                        background: completed ? s.color : active ? 'linear-gradient(135deg,#ffffff,#f3f4f6)' : 'rgba(255,255,255,0.06)',
-                        boxShadow: completed ? `0 6px 24px ${s.color}40, inset 0 -6px 16px #00000080` : active ? `0 6px 20px #ffffff20` : 'none',
-                      }}
-                    >
-                      {completed ? '✓' : idx + 1}
-                    </motion.div>
+      {/* Step indicator container */}
+<div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 overflow-x-auto">
+  {stepItems.map((s, idx) => {
+    const completed = currentStep > s.id;
+    const active = currentStep === s.id;
+    return (
+      <div key={s.id} className="flex-1 min-w-[120px] sm:min-w-0">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+          {/* Step circle */}
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: active || completed ? 1 : 0.98 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-black font-bold`}
+            style={{
+              background: completed ? s.color : active ? 'linear-gradient(135deg,#ffffff,#f3f4f6)' : 'rgba(255,255,255,0.06)',
+              boxShadow: completed ? `0 6px 24px ${s.color}40, inset 0 -6px 16px #00000080` : active ? `0 6px 20px #ffffff20` : 'none',
+            }}
+          >
+            {completed ? '✓' : idx + 1}
+          </motion.div>
 
-                    <div className="ml-4">
-                      <div className={`text-sm ${active ? 'text-white font-bold' : 'text-gray-300'}`}>{s.title}</div>
-                      <div className="text-xs text-gray-400">{completed ? 'Completed' : active ? 'Current' : 'Pending'}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          {/* Step text */}
+          <div className="mt-2 sm:mt-0 sm:ml-4">
+            <div className={`text-xs sm:text-sm ${active ? 'text-white font-bold' : 'text-gray-300'}`}>
+              {s.title}
+            </div>
+            <div className="text-[10px] sm:text-xs text-gray-400">
+              {completed ? 'Completed' : active ? 'Current' : 'Pending'}
+            </div>
           </div>
         </div>
       </div>
-
+    );
+  })}
+</div>
       {/* Info Card */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
-          Eligible wallets can claim <span className="text-green-400 font-bold">8000 $ArbiPup</span> tokens for a small gas fee. Make sure your wallet qualifies before claiming.
-        </div>
-      </div>
+<div className="max-w-4xl mx-auto mt-8 mb-8">
+  <div className="bg-white/6 backdrop-blur-sm border border-white/6 rounded-lg p-4 text-center">
+    Eligible wallets can snag <span className="text-green-400 font-bold">8000 $Arbipup tokens </span>, Check if you are in the pack and claim your spot!.
+  </div>
+</div>
+
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -245,9 +250,9 @@ export default function ClaimPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-yellow-400 font-extrabold text-lg">1. Connect Wallet</h3>
-                  <p className="text-sm text-gray-300 mt-2">Connect your wallet to begin. Use RainbowKit for a smooth flow.</p>
+                  <p className="text-sm text-gray-300 mt-2">Connect your wallet to get started.</p>
                 </div>
-                <div className="text-yellow-200 font-bold">Step</div>
+                <div className="text-yellow-200 font-bold"></div>
               </div>
 
               <div className="mt-6">
@@ -299,11 +304,16 @@ export default function ClaimPage() {
               <motion.div whileHover={{ rotateX: -4, rotateY: 4 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
                 <h3 className="text-pink-400 font-extrabold text-lg">2. Terms & Conditions</h3>
                 <ul className="text-sm list-disc pl-5 text-gray-300 space-y-1 mt-3">
-                  <li>One wallet per degen. Do not be greedy.</li>
-                  <li>Only works on Arbitrum. L2 gang only.</li>
-                  <li>No contract wallets. Bots, take the L.</li>
-                  <li>Once you claim, that's it. No undo button.</li>
-                  <li>Not financial advice. We're just having fun here.</li>
+                   <li>One wallet per degen. Don it be greedy, share the love.</li>
+<li>Arbitrum only. L2 gang, we ride together.</li>
+<li>No contract wallets. Bots, take the L and touch grass.</li>
+<li>Once you claim, that is it. No undo, no refunds, no tears.</li>
+<li>Not financial advice. This is for fun, not for your retirement plan.</li>
+<li>Volatility is the game. Prices go up, down, and sideways, sometimes in the same minute.</li>
+<li>You are 100% responsible for your clicks, trades, and memes.</li>
+<li>If you lose sleep over this, maybe go outside and get some sunlight.</li>
+<li>We reserve the right to change the rules if the vibes demand it.</li>
+
                 </ul>
 
                 <label className="flex items-center space-x-2 mt-4">
@@ -313,7 +323,7 @@ export default function ClaimPage() {
                     onChange={(e) => setAgreed(e.target.checked)}
                     className="h-4 w-4 rounded border-gray-600 bg-black/40"
                   />
-                  <span className="text-sm">I accept these terms</span>
+                  <span className="text-sm">i am down with the terms, dawg, send it</span>
                 </label>
               </motion.div>
             </motion.div>
@@ -340,7 +350,7 @@ export default function ClaimPage() {
             >
               <motion.div whileHover={{ rotateX: 3, rotateY: -3 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
                 <h3 className="text-blue-300 font-extrabold text-lg">3. Eligibility Check</h3>
-                <p className="text-sm text-gray-300 mt-2">We check your tx activity and backend records to determine eligibility.</p>
+                <p className="text-sm text-gray-300 mt-2">In this section, we will review your activity on the Arbitrum network to determine your eligibility</p>
 
                 <div className="mt-6">
                   {eligibility === 'unknown' && (
@@ -355,7 +365,7 @@ export default function ClaimPage() {
 
                   {eligibility === 'eligible' && (
                     <div className="text-center">
-                      <p className="text-green-400 font-semibold mb-3">🐶 Lucky dawg, eligibility unlocked!</p>
+                      <p className="text-green-400 font-semibold mb-3">Ultra-lucky dawg, the gates is wide open!</p>
                       <motion.img
                         src={happyGif}
                         alt="Happy"
@@ -368,7 +378,7 @@ export default function ClaimPage() {
 
                   {eligibility === 'ineligible' && (
                     <div className="text-center">
-                      <p className="text-red-400 font-semibold mb-3">😵 Dawg, you missed it this time. Go touch grass.</p>
+                      <p className="text-red-400 font-semibold mb-3">😵 Dawg, no luck today. Maybe go get a job? 😂 Just kidding, catch us next time.</p>
                       <motion.img
                         src={sadGif}
                         alt="Sad"
@@ -404,7 +414,7 @@ export default function ClaimPage() {
             >
               <motion.div whileHover={{ rotateX: -4, rotateY: -6 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
                 <h3 className="text-green-300 font-extrabold text-lg">4. Claim Reward</h3>
-                <p className="text-sm text-gray-300 mt-2">Claim your tokens for a small gas fee.</p>
+                <p className="text-sm text-gray-300 mt-2">Snag your tokens, dawg, just cover the gas.</p>
 
                 <div className="mt-6">
                   {!claimed ? (
@@ -418,11 +428,11 @@ export default function ClaimPage() {
                         boxShadow: '0 8px 30px rgba(16,185,129,0.12)',
                       }}
                     >
-                      {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup for ${CLAIM_FEE_ETH} ETH`}
+                      {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup`}
                     </button>
                   ) : (
                     <div className="text-center text-green-400 font-semibold">
-                      <div>🎉 Already claimed!</div>
+                      <div>🎉 Already claimed! What now, dawg, trying to take the whole supply?</div>
                       <div className="text-sm text-gray-300 mt-1">Check your wallet.</div>
                     </div>
                   )}
@@ -459,8 +469,8 @@ export default function ClaimPage() {
 
               <div className="flex items-start justify-between">
                 <div>
-                  <h2 className="text-2xl font-extrabold text-white">🎉 Claim Successful!</h2>
-                  <p className="text-sm text-gray-300 mt-2">You have claimed 8,000 $ArbiPup — enjoy the gains. Thank you for being part of the fam!</p>
+                  <h2 className="text-2xl font-extrabold text-white">🎉 Bag secured, dawg!</h2>
+                  <p className="text-sm text-gray-300 mt-2">You bagged 8,000 $ArbiPup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
                 </div>
 
                 <button
