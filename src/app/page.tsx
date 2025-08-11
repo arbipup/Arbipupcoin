@@ -70,7 +70,7 @@ export default function Home() {
   animate={{ opacity: 1 }}
   transition={{ delay: 0.4 }}
 >
-  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span> – the wild memecoin puppy 
+  Welcome to <span className="text-blue-400 font-extrabold">$Arbipup</span> , the wild puppy 
   let loose on <span className="text-cyan-300 font-extrabold">Arbitrum</span>.  
   <br />
   <span className="text-pink-400 font-extrabold">Born from pure chaos.</span> 
