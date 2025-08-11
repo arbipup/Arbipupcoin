@@ -84,13 +84,16 @@ export default function Home() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-            <motion.a
-              href="/claim"
-              whileHover={{ scale: 1.1 }}
-              className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold py-3 px-8 rounded-xl shadow-lg animate-pulse"
-            >
-              🎁 Claim $Arbipup
-            </motion.a>
+            {/* Disabled Claim button */}
+<motion.a
+  href="#"
+  onClick={(e) => e.preventDefault()}
+  whileHover={{ scale: 1 }}
+  className="bg-gray-600 text-gray-300 font-bold py-3 px-8 rounded-xl shadow-lg opacity-50 cursor-not-allowed"
+>
+  🎁 Claim $Arbipup (Coming Soon)
+</motion.a>
+
             <motion.a
               href="https://www.arbipup.fun"
               target="_blank"
