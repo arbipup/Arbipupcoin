@@ -249,7 +249,7 @@ export default function ClaimPage() {
               transition={{ duration: 0.5 }}
             >
               <p className="text-lg font-semibold text-green-400">
-                🎉 Success! Your wallet is locked in. Stay tuned for next phase!.
+                🎉Dawg, Your wallet is locked in. Stay tuned for next phase!.
               </p>
               <motion.img
                 src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
