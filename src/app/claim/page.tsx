@@ -167,7 +167,7 @@ export default function ClaimPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            🐶 Arbipup Airdrop, Lock In Your Wallet
+            🐶 Arbipup Airdrop Registration, Lock In Your Wallet
           </motion.h1>
 
           {/* Timer */}
@@ -182,9 +182,9 @@ export default function ClaimPage() {
             <h2 className="text-purple-400 font-semibold">Eligibility Criteria:</h2>
             <ul className="list-disc list-inside space-y-1">
               <li>Interacted with Arbitrum between <strong>Apr 11, 2024 – Apr 11, 2025</strong></li>
-              <li>Snapshot: <strong>Apr 11, 2025 – 00:00 UTC</strong></li>
+              <li>Snapshot: <strong>Apr 11, 2025 – 00:00 AM UTC</strong></li>
               <li>Eligibility is <strong>not automatic you must register your wallet </strong></li>
-              <li>Ends after <strong>3 days</strong> or <strong>300k wallets</strong></li>
+              <li>Ends after <strong>3 days</strong><strong></strong></li>
             </ul>
 
             <label className="flex items-start space-x-2 mt-4 cursor-pointer">
