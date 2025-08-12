@@ -45,7 +45,3 @@ Born from pure chaos, fueled by internet dog energy. No roadmap. No promises. Ju
 - **Website:** https://arbipup.fun  
 - **Twitter/X:** https://x.com/arbipupcoin  
 - **Telegram:** https://t.me/arbipupcoin  
-
-
-*This README is based on the live copy from [arbipup.fun](https://arbipup.fun/)*  
-
