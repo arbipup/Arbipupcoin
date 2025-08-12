@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arbipup — Absolute Chaos (ARBIPUP)
 
-## Getting Started
+Welcome to **Arbipup** — the wild puppy terrorizing the **Arbitrum** chain.  
+Born from pure chaos, fueled by internet dog energy. No roadmap. No promises. Just memes and mayhem.
 
-First, run the development server:
+> **Disclaimer:** $ARBIPUP is for entertainment only — zero guarantees, zero expectations. Just pure memecoin madness.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Quick Facts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Ticker:** $ARBIPUP  
+- **Chain:** Arbitrum  
+- **Total Supply:** 2,000,000,000 $ARBIPUP
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Tokenomics (High-Level)
 
-To learn more about Next.js, take a look at the following resources:
+| Category           | Allocation            |
+|--------------------|------------------------|
+| Community          | 60% (1.2 billion $ARBIPUP) |
+| Liquidity          | 30% (600 million $ARBIPUP) |
+| Team / Marketing   | 10% (200 million $ARBIPUP) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## The Airdrop Hunt
 
-## Deploy on Vercel
+- **Airdrop Pool:** 800,000,000 $ARBIPUP  
+- **Claim Size:** 8,000 $ARBIPUP per eligible wallet  
+- **Eligibility:** active wallets between 11th April 2024 and 11th April 2025
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Vibe & “Governance”
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No whitepaper. No roadmap. No corporate fluff.  
+- We run on **controlled chaos**: devs handle security; the community howls the loudest wins.  
+- Expect memes, madness, and infinite puppy vibes.
+
+---
+
+##  Official Channels
+
+- **Website:** https://arbipup.fun  
+- **Twitter/X:** https://x.com/arbipupcoin  
+- **Telegram:** https://t.me/arbipupcoin  
+
+
+*This README is based on the live copy from [arbipup.fun](https://arbipup.fun/)*  
+
