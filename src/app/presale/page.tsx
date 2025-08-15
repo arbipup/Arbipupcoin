@@ -228,139 +228,229 @@ const userPurchasedDisplay = userPurchasedTokensRaw
     }
   };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-[#100417] to-[#0c0c0c] text-white">
-      <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-4xl mx-auto bg-black/60 border border-purple-700 rounded-2xl p-8"
-        >
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-center mb-4">🐶 Arbipup Presale</h1>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-900/60 rounded-xl">
-              <h2 className="text-lg font-semibold">Presale Details</h2>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div><span className="text-gray-400">Total Token Supply</span><div className="font-bold">{tokenSupplyDisplay}</div></div>
-                <div><span className="text-gray-400">Presale Supply</span><div className="font-bold">{presaleCapDisplay}</div></div>
-                <div><span className="text-gray-400">Valuation (FDV)</span><div className="font-bold">$2,000,000</div></div>
-                <div><span className="text-gray-400">Price per Token</span><div className="font-bold">$0.001</div></div>
-                <div><span className="text-gray-400">Pair</span><div className="font-bold">USDT / USDC</div></div>
-                <div><span className="text-gray-400">Tokens Sold</span><div className="font-bold">{tokensSoldDisplay}</div></div>
+ return (
+  <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#00111f] via-[#001a33] to-[#000814] text-white">
+    <Navbar />
+    <main className="flex-grow container mx-auto px-4 py-16">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-4xl mx-auto bg-[#001122]/70 border border-[#00c2ff] rounded-2xl p-8"
+      >
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#00c2ff] to-[#ffd500] bg-clip-text text-transparent">
+          🐶 Arbipup Presale
+        </h1>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Left Column */}
+          <div className="space-y-4 p-4 bg-[#001122]/60 rounded-xl">
+            <h2 className="text-lg font-semibold text-[#ffd500]">Presale Details</h2>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div>
+                <span className="text-gray-400">Total Token Supply</span>
+                <div className="font-bold">{tokenSupplyDisplay}</div>
               </div>
-              {/* Progress Bar */}
-              <div className="mt-6">
-                <div className="flex justify-between text-sm font-bold mb-1">
-                  <span>Min $200k</span>
-                  <span>${usdRaised.toLocaleString()} Raised</span>
-                  <span>Max $400k</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-4">
-                  <div
-                    className="bg-green-500 h-4 rounded-full"
-                    style={{ width: `${progressPercent}%` }}
-                  ></div>
-                </div>
+              <div>
+                <span className="text-gray-400">Presale Supply</span>
+                <div className="font-bold">{presaleCapDisplay}</div>
               </div>
-              <div className="mt-4 text-sm text-gray-300">
-                <p><strong>Total Purchased:</strong> {userPurchasedDisplay} Arbipup</p>
-                <p><strong>Total Purchased:</strong> ${supabasePurchased}</p>
-                <p className="mt-2">Min per wallet: <strong>${MIN_USD}</strong> — Max per wallet: <strong>${MAX_USD}</strong></p>
+              <div>
+                <span className="text-gray-400">Valuation (FDV)</span>
+                <div className="font-bold">$2,000,000</div>
+              </div>
+              <div>
+                <span className="text-gray-400">Price per Token</span>
+                <div className="font-bold">$0.001</div>
+              </div>
+              <div>
+                <span className="text-gray-400">Pair</span>
+                <div className="font-bold">USDT / USDC</div>
+              </div>
+              <div>
+                <span className="text-gray-400">Tokens Sold</span>
+                <div className="font-bold">{tokensSoldDisplay}</div>
               </div>
             </div>
-            <div className="p-4 bg-gradient-to-br from-gray-900/40 to-black/40 rounded-xl">
-              <label className="block mb-2 text-sm">Connect Wallet</label>
-              <div className="mb-4"><ConnectButton /></div>
-              {hasMounted && isConnected && (
-  <p className="text-xs text-gray-400 mb-4">
-    Connected Network: Arbitrum
-  </p>
-)}
 
-              {/* Terms Section */}
-              <div ref={termsRef} className="mb-4 bg-gray-800 p-3 rounded text-sm">
-                <h3 className="font-bold mb-2">Terms & Conditions</h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>No refunds after purchase.</li>
-                  <li>Tokens distributed after purchase, but paused until listing.</li>
-                  <li>Purchase limits apply per wallet.</li>
-                  <li>I participate at my own risk.</li>
-                  <li>By purchasing, you agree to our policies.</li>
-                </ul>
+            {/* Progress Bar */}
+            <div className="mt-6">
+              <div className="flex justify-between text-sm font-bold mb-1">
+                <span>Min $200k</span>
+                <span>${usdRaised.toLocaleString()} Raised</span>
+                <span>Max $400k</span>
               </div>
-              {hasMounted && isConnected ? (
-                <>
-                  <div className="mb-3">
-                    <label className="block mb-1 text-sm">Choose stable</label>
-                    <div className="flex gap-2">
-                      <button onClick={() => setStable("USDT")} className={`px-3 py-2 rounded ${stable === "USDT" ? "bg-purple-600" : "bg-gray-800"}`}>USDT</button>
-                      <button onClick={() => setStable("USDC")} className={`px-3 py-2 rounded ${stable === "USDC" ? "bg-purple-600" : "bg-gray-800"}`}>USDC</button>
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label className="block mb-1 text-sm">Amount (USD)</label>
-                    <input
-                      type="number"
-                      min={MIN_USD}
-                      max={MAX_USD}
-                      step="0.01"
-                      value={inputAmount}
-                      onChange={(e) => setInputAmount(e.target.value)}
-                      placeholder={`${MIN_USD} - ${MAX_USD}`}
-                      className="w-full p-3 rounded bg-gray-800 text-black"
-                    />
-                    <p className="text-xs text-gray-400 mt-2">Receive: <span className="font-bold">{receiveString} Arbipup</span></p>
-                  </div>
-                  <div className="mb-4">
-                    <label className="flex items-start space-x-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={agreed}
-                        onChange={(e) => setAgreed(e.target.checked)}
-                        className="mt-1 w-5 h-5 accent-purple-500"
-                      />
-                      <span className="text-sm">
-                        I agree to the <a className="text-arbiblue underline cursor-pointer" onClick={() => termsRef.current?.scrollIntoView({ behavior: "smooth" })}>Terms & Conditions</a>.
-                      </span>
-                    </label>
-                  </div>
-                  <button
-                    onClick={handleBuy}
-                    disabled={!agreed || loading}
-                    className={`w-full py-3 font-bold rounded ${(!agreed || loading) ? "bg-gray-600 cursor-not-allowed" : "bg-green-500 hover:bg-green-400"}`}
-                  >
-                    {loading ? "Processing..." : "Approve & Buy"}
-                  </button>
-                  {status && <p className="mt-3 text-sm text-yellow-300">{status}</p>}
-                  {txHash && (
-                    <div className="mt-4 text-sm bg-gray-900 p-3 rounded">
-                      <p className="font-semibold text-green-300">Success 🎉</p>
-                      <p>View transaction: <a className="text-arbiblue underline" href={`${ARB_SCAN_TX_PREFIX}${txHash}`} target="_blank" rel="noreferrer">{txHash.slice(0, 10)}...{txHash.slice(-8)}</a></p>
-                      <p className="mt-2">You received <strong>{receiveString}</strong> Arbipup for <strong>${inputAmount}</strong>.</p>
-                    </div>
-                  )}
-                  {showCongrats && (
-                    <div className="mt-6 p-4 bg-gradient-to-r from-pink-500 to-purple-600 text-black rounded-lg text-center">
-                      <h3 className="text-lg font-bold">🎉 Congratulations!</h3>
-                      <p className="mt-2">Your purchase was successful. Tokens should be in your wallet shortly.</p>
-                    </div>
-                  )}
-                </>
-              ) : (
-                
-               hasMounted && (
-    <p className="text-sm text-gray-400">
-      Please connect your wallet to participate in the presale.
-    </p>
-  )
-)}
+              <div className="w-full bg-gray-800 rounded-full h-4">
+                <div
+                  className="bg-[#00c2ff] h-4 rounded-full"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Purchase Info */}
+            <div className="mt-4 text-sm text-gray-300">
+              <p>
+                <strong>Total Purchased:</strong> {userPurchasedDisplay} Arbipup
+              </p>
+              <p>
+                <strong>Total Purchased:</strong> ${supabasePurchased}
+              </p>
+              <p className="mt-2">
+                Min per wallet: <strong>${MIN_USD}</strong> — Max per wallet:{" "}
+                <strong>${MAX_USD}</strong>
+              </p>
             </div>
           </div>
-        </motion.div>
-      </main>
-      <Footer />
-    </div>
-  );
-}
 
+          {/* Right Column */}
+          <div className="p-4 bg-gradient-to-br from-[#001122]/40 to-[#000814]/40 rounded-xl">
+            <label className="block mb-2 text-sm text-[#ffd500]">Connect Wallet</label>
+            <div className="mb-4">
+              <ConnectButton />
+            </div>
+            {hasMounted && isConnected && (
+              <p className="text-xs text-gray-400 mb-4">Connected Network: Arbitrum</p>
+            )}
+
+            {/* Terms Section */}
+            <div ref={termsRef} className="mb-4 bg-[#001a33] p-3 rounded text-sm">
+              <h3 className="font-bold mb-2 text-[#00c2ff]">Terms & Conditions</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>No refunds after purchase.</li>
+                <li>Tokens distributed after purchase, but paused until listing.</li>
+                <li>Purchase limits apply per wallet.</li>
+                <li>I participate at my own risk.</li>
+                <li>By purchasing, you agree to our policies.</li>
+              </ul>
+            </div>
+
+            {hasMounted && isConnected ? (
+              <>
+                {/* Stable Selection */}
+                <div className="mb-3">
+                  <label className="block mb-1 text-sm">Choose stable</label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setStable("USDT")}
+                      className={`px-3 py-2 rounded ${
+                        stable === "USDT" ? "bg-[#00c2ff]" : "bg-gray-800"
+                      }`}
+                    >
+                      USDT
+                    </button>
+                    <button
+                      onClick={() => setStable("USDC")}
+                      className={`px-3 py-2 rounded ${
+                        stable === "USDC" ? "bg-[#00c2ff]" : "bg-gray-800"
+                      }`}
+                    >
+                      USDC
+                    </button>
+                  </div>
+                </div>
+
+                {/* Amount Input */}
+                <div className="mb-3">
+                  <label className="block mb-1 text-sm">Amount (USD)</label>
+                  <input
+                    type="number"
+                    min={MIN_USD}
+                    max={MAX_USD}
+                    step="0.01"
+                    value={inputAmount}
+                    onChange={(e) => setInputAmount(e.target.value)}
+                    placeholder={`${MIN_USD} - ${MAX_USD}`}
+                    className="w-full p-3 rounded bg-[#001122] text-white"
+                  />
+                  <p className="text-xs text-gray-400 mt-2">
+                    Receive: <span className="font-bold">{receiveString} Arbipup</span>
+                  </p>
+                </div>
+
+                {/* Agreement Checkbox */}
+                <div className="mb-4">
+                  <label className="flex items-start space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="mt-1 w-5 h-5 accent-[#00c2ff]"
+                    />
+                    <span className="text-sm">
+                      I agree to the{" "}
+                      <a
+                        className="text-[#00c2ff] underline cursor-pointer"
+                        onClick={() =>
+                          termsRef.current?.scrollIntoView({ behavior: "smooth" })
+                        }
+                      >
+                        Terms & Conditions
+                      </a>
+                      .
+                    </span>
+                  </label>
+                </div>
+
+                {/* Buy Button */}
+                <button
+                  onClick={handleBuy}
+                  disabled={!agreed || loading}
+                  className={`w-full py-3 font-bold rounded ${
+                    !agreed || loading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-[#ffd500] text-black hover:bg-yellow-400"
+                  }`}
+                >
+                  {loading ? "Processing..." : "Approve & Buy"}
+                </button>
+
+                {/* Status Message */}
+                {status && <p className="mt-3 text-sm text-[#ffd500]">{status}</p>}
+
+                {/* Transaction Hash */}
+                {txHash && (
+                  <div className="mt-4 text-sm bg-[#001122] p-3 rounded">
+                    <p className="font-semibold text-[#00ff88]">Success 🎉</p>
+                    <p>
+                      View transaction:{" "}
+                      <a
+                        className="text-[#00c2ff] underline"
+                        href={`${ARB_SCAN_TX_PREFIX}${txHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {txHash.slice(0, 10)}...{txHash.slice(-8)}
+                      </a>
+                    </p>
+                    <p className="mt-2">
+                      You received <strong>{receiveString}</strong> Arbipup for{" "}
+                      <strong>${inputAmount}</strong>.
+                    </p>
+                  </div>
+                )}
+
+                {/* Congrats Box */}
+                {showCongrats && (
+                  <div className="mt-6 p-4 bg-gradient-to-r from-[#00c2ff] to-[#ffd500] text-black rounded-lg text-center">
+                    <h3 className="text-lg font-bold">🎉 Congratulations!</h3>
+                    <p className="mt-2">
+                      Your purchase was successful. Tokens should be in your wallet
+                      shortly.
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              hasMounted && (
+                <p className="text-sm text-gray-400">
+                  Please connect your wallet to participate in the presale.
+                </p>
+              )
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </main>
+    <Footer />
+  </div>
+);
+}
