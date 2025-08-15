@@ -12,7 +12,7 @@ export default function Navbar() {
       {/* Logo Section */}
       <div className="flex items-center gap-2 sm:gap-3">
         <img 
-          src="https://i.postimg.cc/pV6KqQ53/Main-logo-00.png" 
+          src="https://i.postimg.cc/PqLdTJCR/favicon.png" 
           alt="ArbiPup Logo" 
           className="w-8 h-8 sm:w-10 sm:h-10"
         />
