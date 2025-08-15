@@ -101,10 +101,6 @@ export default function Home() {
             </motion.a>
           </div>
 
-          <p className="text-xs text-center text-gray-500 mt-6">
-            Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
-          </p>
-        </section>
 
         {/* Airdrop Details Section */}
         <section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
