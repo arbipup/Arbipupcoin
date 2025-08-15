@@ -110,6 +110,11 @@ export default function Home() {
 </p>
 </section>
 
+<p className="text-xs text-center text-gray-500 mt-6">
+  Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
+</p>
+</section>
+
 {/* Airdrop Details Section */}
 <section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
   <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-300 via-yellow-200 to-white bg-clip-text text-transparent">
@@ -131,6 +136,7 @@ export default function Home() {
     <li>Snapshot taken: <strong className="text-blue-300">Apr 11, 2025 – 00:00 AM UTC</strong></li>
   </ul>
 </section>
+
 
         {/* Tokenomics */}
         <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-yellow-300 my-20 text-center">
