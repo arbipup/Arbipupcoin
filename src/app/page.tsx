@@ -187,9 +187,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+        </main>
+<Footer />
+</div>
 
-      <Footer />
-    </div>
   );
 }
