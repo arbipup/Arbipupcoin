@@ -126,6 +126,42 @@ export default function Home() {
           </p>
         </section>
 
+{/* Airdrop Details Section */}
+<section className="max-w-3xl mx-auto mt-16 bg-black/60 backdrop-blur-md border border-purple-700 rounded-2xl p-8 shadow-2xl space-y-6">
+  <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+    🎉 Arbipup Airdrop Details
+  </h2>
+
+  <p className="text-gray-300 text-base leading-relaxed">
+    The Arbipup Airdrop is our way of celebrating the vibrant <strong>Arbitrum community</strong>.  
+    Arbitrum launched its mainnet on <strong>August 31, 2021</strong> and has thrived ever since, becoming a home for builders, degens, and NFT lovers.  
+    Arbipup is here to honor that spirit — rewarding active users and bringing more life to the chain.
+  </p>
+
+  <h3 className="text-purple-400 font-semibold mt-4">📜 Eligibility Criteria:</h3>
+  <ul className="list-disc list-inside space-y-1 text-gray-300">
+    <li>On-chain activity on Arbitrum between <strong>Apr 11, 2024 – Apr 11, 2025</strong></li>
+    <li>Volume & transaction count considered</li>
+    <li>Other activity metrics (NFT trades, DeFi interactions, etc.)</li>
+    <li>Wallet registration required before claiming</li>
+    <li>Snapshot taken: <strong>Apr 11, 2025 – 00:00 AM UTC</strong></li>
+  </ul>
+
+  <h3 className="text-purple-400 font-semibold mt-4">📊 Tokenomics:</h3>
+  <ul className="list-disc list-inside space-y-1 text-gray-300">
+    <li>Total Supply: <strong>2,000,000,000</strong> $ARBIPUP</li>
+    <li>60% — Community Airdrop</li>
+    <li>30% — Liquidity (burned on Day 1)</li>
+    <li>10% — Team & Marketing</li>
+    <li>All allocations locked for 3 weeks</li>
+  </ul>
+
+  <p className="text-xs text-center text-gray-500 mt-6">
+    Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
+  </p>
+</section>
+
+
         {/* Chaos GIFs */}
         <section className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-pink-400 mb-6 text-center">Absolute Chaos Season</h2>
