@@ -303,7 +303,7 @@ const userPurchasedDisplay = userPurchasedTokensRaw
 
           {/* Right Column */}
           <div className="p-4 bg-gradient-to-br from-[#001122]/40 to-[#000814]/40 rounded-xl">
-            <label className="block mb-2 text-sm text-[#ffd500]">Connect Wallet</label>
+            <label className="block mb-2 text-sm text-[#ffd500]"> </label>
             <div className="mb-4">
               <ConnectButton />
             </div>
