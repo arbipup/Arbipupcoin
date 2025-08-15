@@ -100,7 +100,7 @@ export default function Home() {
               🛒 Buy $Arbipup (Coming Soon)
             </motion.a>
           </div>
-
+        </section>
 
         {/* Airdrop Details Section */}
         <section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
@@ -187,8 +187,11 @@ export default function Home() {
             </div>
           </div>
         </section>
-        </main>
-<Footer />
-</div>
+      </main>
+
+      {/* ✅ Footer properly placed inside the return */}
+      <Footer />
+    </div>
   );
 }
+
