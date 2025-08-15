@@ -109,8 +109,8 @@ export default function Home() {
         </section>
 
 {/* Airdrop Details Section */}
-<section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-purple-700 rounded-2xl p-8 shadow-2xl space-y-6">
-  <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+<section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-500 rounded-2xl p-8 shadow-2xl space-y-6">
+  <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-400 via-yellow-300 to-white bg-clip-text text-transparent">
     🎉 Arbipup Airdrop Details
   </h2>
 
@@ -120,7 +120,7 @@ export default function Home() {
     Arbipup is here to honor that spirit — rewarding active users and bringing more life to the chain.
   </p>
 
-  <h3 className="text-purple-400 font-semibold mt-4">📜 Eligibility Criteria:</h3>
+  <h3 className="text-yellow-300 font-semibold mt-4">📜 Eligibility Criteria:</h3>
   <ul className="list-disc list-inside space-y-1 text-gray-300">
     <li>On-chain activity on Arbitrum between <strong>Apr 11, 2024 – Apr 11, 2025</strong></li>
     <li>Volume & transaction count considered</li>
@@ -128,6 +128,7 @@ export default function Home() {
     <li>Wallet registration required before claiming</li>
     <li>Snapshot taken: <strong>Apr 11, 2025 – 00:00 AM UTC</strong></li>
   </ul>
+</section>
 
   <p className="text-xs text-center text-gray-500 mt-6">
     Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
@@ -154,12 +155,12 @@ export default function Home() {
 
         {/* Chaos GIFs */}
         <section className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-pink-400 mb-6 text-center">Absolute Chaos Season</h2>
+          <h2 className="text-3xl font-bold text-blue-400 mb-6 text-center">Absolute Chaos Season</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {chaosGifs.map((gif, i) => (
               <motion.div
                 key={i}
-                className="overflow-hidden rounded-xl border-2 border-pink-400 shadow-xl bg-black/50"
+                className="overflow-hidden rounded-xl border-2 border-blue-400 shadow-xl bg-black/50"
                 whileHover={{ scale: 1.1 }}
               >
                 <img src={gif} alt={`gif-${i}`} className="w-full h-48 object-cover" />
@@ -170,12 +171,12 @@ export default function Home() {
 
         {/* New Chaotic Content */}
         <section className="max-w-6xl mx-auto mt-20 px-6">
-          <div className="bg-gradient-to-br from-pink-900 via-black to-cyan-900 p-10 rounded-2xl border-4 border-pink-500 shadow-2xl">
-            <h2 className="text-4xl font-extrabold text-center text-pink-300 mb-8">
+          <div className="bg-gradient-to-br from-blue-900 via-black to-cyan-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
+            <h2 className="text-4xl font-extrabold text-center text-blue-300 mb-8">
               🌀 Chaotic Pup Carnival
             </h2>
             <div className="grid sm:grid-cols-3 gap-6 text-gray-300">
-              <div className="bg-black/70 p-5 rounded-xl border border-pink-400 hover:border-yellow-300">
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300">
                 <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
                 <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
               </div>
@@ -183,7 +184,7 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
                 <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
               </div>
-              <div className="bg-black/70 p-5 rounded-xl border border-pink-400 hover:border-yellow-300">
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300">
                 <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
                 <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
               </div>
