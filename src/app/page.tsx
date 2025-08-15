@@ -24,20 +24,20 @@ export default function Home() {
       <Navbar />
       <AudioPlayer />
 
-      {/* Animated Gradient Chaos Background */}
+      {/* Animated Gradient Background (blue/yellow/white) */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-900 via-yellow-700 to-blue-500 animate-gradient-move"></div>
 
-      {/* Floating Chaos Particles */}
+      {/* Floating Particles */}
       <div className="pointer-events-none fixed inset-0 z-0">
         {Array.from({ length: 40 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-gradient-to-r from-blue-400 via-yellow-300 to-white opacity-30 blur-xl"
             style={{
-              width: Math.random() * 80 + 30 + "px",
-              height: Math.random() * 80 + 30 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
+              width: `${Math.random() * 80 + 30}px`,
+              height: `${Math.random() * 80 + 30}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
             }}
             animate={{
               x: [0, Math.random() * 100 - 50],
@@ -70,17 +70,14 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Welcome to <span className="text-blue-300 font-extrabold">$Arbipup</span>, the wild puppy 
+            Welcome to <span className="text-blue-300 font-extrabold">$Arbipup</span>, the wild puppy
             let loose on <span className="text-yellow-300 font-extrabold">Arbitrum</span>.
             <br />
-            <span className="text-blue-200 font-extrabold">Born from pure chaos.</span> 
-            Fueled by bad ideas and good vibes.
+            <span className="text-blue-200 font-extrabold">Born from pure chaos.</span> Fueled by bad ideas and good vibes.
             <br />
-            <span className="italic text-gray-300">
-              No roadmap. No promises. Just vibes and woofs.
-            </span>
+            <span className="italic text-gray-300">No roadmap. No promises. Just vibes and woofs.</span>
             <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
-              Disclaimer: $Arbipup is for memes only. no guarantees. Just internet dog energy.
+              Disclaimer: $Arbipup is for memes only. No value, no guarantees. Just internet dog energy.
             </span>
           </motion.p>
 
@@ -103,40 +100,40 @@ export default function Home() {
               🛒 Buy $Arbipup (Coming Soon)
             </motion.a>
           </div>
+
+          <p className="text-xs text-center text-gray-500 mt-6">
+            Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
+          </p>
         </section>
 
-    <p className="text-xs text-center text-gray-500 mt-6">
-  Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
-</p>
-</section>
+        {/* Airdrop Details Section */}
+        <section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
+          <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-300 via-yellow-200 to-white bg-clip-text text-transparent">
+            🎉 Arbipup Airdrop Details
+          </h2>
 
-<p className="text-xs text-center text-gray-500 mt-6">
-  Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
-</p>
-</section>
+          <p className="text-gray-200 text-base leading-relaxed">
+            The Arbipup Airdrop is our way of celebrating the vibrant{" "}
+            <strong className="text-yellow-300">Arbitrum community</strong>. Arbitrum launched its mainnet on{" "}
+            <strong className="text-blue-300">August 31, 2021</strong> and has thrived ever since, becoming a home for
+            builders, degens, and NFT lovers. Arbipup is here to honor that spirit — rewarding active users and bringing
+            more life to the chain.
+          </p>
 
-{/* Airdrop Details Section */}
-<section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
-  <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-300 via-yellow-200 to-white bg-clip-text text-transparent">
-    🎉 Arbipup Airdrop Details
-  </h2>
-
-  <p className="text-gray-200 text-base leading-relaxed">
-    The Arbipup Airdrop is our way of celebrating the vibrant <strong className="text-yellow-300">Arbitrum community</strong>.  
-    Arbitrum launched its mainnet on <strong className="text-blue-300">August 31, 2021</strong> and has thrived ever since, becoming a home for builders, degens, and NFT lovers.  
-    Arbipup is here to honor that spirit — rewarding active users and bringing more life to the chain.
-  </p>
-
-  <h3 className="text-yellow-300 font-semibold mt-4">📜 Eligibility Criteria:</h3>
-  <ul className="list-disc list-inside space-y-1 text-gray-200">
-    <li>On-chain activity on Arbitrum between <strong className="text-blue-300">Apr 11, 2024 – Apr 11, 2025</strong></li>
-    <li>Volume & transaction count considered</li>
-    <li>Other activity metrics (NFT trades, DeFi interactions, etc.)</li>
-    <li>Wallet registration required before claiming</li>
-    <li>Snapshot taken: <strong className="text-blue-300">Apr 11, 2025 – 00:00 AM UTC</strong></li>
-  </ul>
-</section>
-
+          <h3 className="text-yellow-300 font-semibold mt-4">📜 Eligibility Criteria:</h3>
+          <ul className="list-disc list-inside space-y-1 text-gray-200">
+            <li>
+              On-chain activity on Arbitrum between{" "}
+              <strong className="text-blue-300">Apr 11, 2024 – Apr 11, 2025</strong>
+            </li>
+            <li>Volume & transaction count considered</li>
+            <li>Other activity metrics (NFT trades, DeFi interactions, etc.)</li>
+            <li>Wallet registration required before claiming</li>
+            <li>
+              Snapshot taken: <strong className="text-blue-300">Apr 11, 2025 – 00:00 AM UTC</strong>
+            </li>
+          </ul>
+        </section>
 
         {/* Tokenomics */}
         <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-yellow-300 my-20 text-center">
@@ -151,9 +148,48 @@ export default function Home() {
             <li>🟡 <strong>Liquidity:</strong> 30%</li>
             <li>⚪ <strong>Team / Marketing:</strong> 10%</li>
           </ul>
-          <p className="mt-6 italic text-yellow-200">
-            2 Billion unleashed for memes, madness & chaos.
-          </p>
+          <p className="mt-6 italic text-yellow-200">2 Billion unleashed for memes, madness & chaos.</p>
+        </section>
+
+        {/* Chaos GIFs */}
+        <section className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-300 via-yellow-200 to-white bg-clip-text text-transparent mb-6">
+            Absolute Chaos Season
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {chaosGifs.map((gif, i) => (
+              <motion.div
+                key={i}
+                className="overflow-hidden rounded-xl border-2 border-blue-400 shadow-xl bg-black/50"
+                whileHover={{ scale: 1.08 }}
+              >
+                <img src={gif} alt={`gif-${i}`} className="w-full h-48 object-cover" />
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Chaotic Pup Carnival */}
+        <section className="max-w-6xl mx-auto mt-20 px-6">
+          <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
+            <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
+              🌀 Chaotic Pup Carnival
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-6 text-gray-200">
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
+                <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
+              </div>
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
+                <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
+              </div>
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
+                <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
 
