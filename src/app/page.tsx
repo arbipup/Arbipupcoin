@@ -108,26 +108,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Tokenomics */}
-        <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-cyan-400 my-20 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-300 to-cyan-400 bg-clip-text text-transparent mb-4 animate-pulse">
-            Tokenomics
-          </h2>
-          <p className="text-gray-300 mb-4">
-            Total Supply: <span className="font-bold text-blue-300">2,000,000,000 $Arbipup</span>
-          </p>
-          <ul className="space-y-3 text-left text-lg inline-block">
-            <li>🔵 <strong>Community:</strong> 60%</li>
-            <li>🟢 <strong>Liquidity:</strong> 30%</li>
-            <li>🟣 <strong>Team / Marketing:</strong> 10%</li>
-          </ul>
-          <p className="mt-6 italic text-cyan-300">
-            2 Billion unleashed for memes, madness & chaos.
-          </p>
-        </section>
-
 {/* Airdrop Details Section */}
-<section className="max-w-3xl mx-auto mt-16 bg-black/60 backdrop-blur-md border border-purple-700 rounded-2xl p-8 shadow-2xl space-y-6">
+<section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-purple-700 rounded-2xl p-8 shadow-2xl space-y-6">
   <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
     🎉 Arbipup Airdrop Details
   </h2>
@@ -147,20 +129,28 @@ export default function Home() {
     <li>Snapshot taken: <strong>Apr 11, 2025 – 00:00 AM UTC</strong></li>
   </ul>
 
-  <h3 className="text-purple-400 font-semibold mt-4">📊 Tokenomics:</h3>
-  <ul className="list-disc list-inside space-y-1 text-gray-300">
-    <li>Total Supply: <strong>2,000,000,000</strong> $ARBIPUP</li>
-    <li>60% — Community Airdrop</li>
-    <li>30% — Liquidity (burned on Day 1)</li>
-    <li>10% — Team & Marketing</li>
-    <li>All allocations locked for 3 weeks</li>
-  </ul>
-
   <p className="text-xs text-center text-gray-500 mt-6">
     Disclaimer: This is <strong>not</strong> in affiliation with Arbitrum core team members.
   </p>
 </section>
 
+        {/* Tokenomics */}
+        <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-cyan-400 my-20 text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-300 to-cyan-400 bg-clip-text text-transparent mb-4 animate-pulse">
+            Tokenomics
+          </h2>
+          <p className="text-gray-300 mb-4">
+            Total Supply: <span className="font-bold text-blue-300">2,000,000,000 $Arbipup</span>
+          </p>
+          <ul className="space-y-3 text-left text-lg inline-block">
+            <li>🔵 <strong>Community:</strong> 60%</li>
+            <li>🟢 <strong>Liquidity:</strong> 30%</li>
+            <li>🟣 <strong>Team / Marketing:</strong> 10%</li>
+          </ul>
+          <p className="mt-6 italic text-cyan-300">
+            2 Billion unleashed for memes, madness & chaos.
+          </p>
+        </section>
 
         {/* Chaos GIFs */}
         <section className="max-w-6xl mx-auto px-6">
