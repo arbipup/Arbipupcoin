@@ -195,7 +195,8 @@ return (
               className="mt-1 w-5 h-5 accent-yellow-400"
             />
             <span className="text-blue-100">
-              I agree that this submission reflects my own decision, and eligibility will be determined by the Arbipup team.
+              Submission = my choice, my bark.
+The final woof on eligibility? Arbipup’s pack calls it.
             </span>
           </label>
         </div>
