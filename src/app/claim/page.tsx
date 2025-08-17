@@ -119,7 +119,7 @@ export default function ClaimPage() {
     return `${hrs}:${mins}:${secs}`;
   };
 
-  const steps = ['Agree to Terms', 'Enter Wallet', 'Done'];
+  const steps = ["Agree to Terms", "Enter Wallet", "Submit", "Done"];
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 text-white relative overflow-hidden">
