@@ -77,7 +77,7 @@ export default function Home() {
             <br />
             <span className="italic text-gray-300">No roadmap. No promises. Just vibes and woofs.</span>
             <span className="block mt-6 text-sm text-gray-400 italic border-t border-gray-700 pt-4">
-              Disclaimer: $Arbipup is for memes only. No value, no guarantees. Just internet dog energy.
+              Disclaimer: $Arbipup is for memes only. no guarantees. Just internet dog energy.
             </span>
           </motion.p>
 
