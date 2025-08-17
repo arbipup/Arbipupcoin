@@ -212,53 +212,54 @@ export default function ClaimPage() {
 
           {/* Wallet Input */}
           {agreed && !submitted && (
-            <div className="text-center space-y-4">
-              <input
-                type="text"
-                value={walletInput}
-                onChange={(e) => setWalletInput(e.target.value.trim())}
-                placeholder="Enter your Ethereum wallet address"
-                className="w-full px-4 py-3 rounded-lg border border-yellow-400 bg-blue-950/50 text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-              <button
-                onClick={handleSubmit}
-                disabled={submitted || loading}
-                className={`w-full py-3 rounded-xl font-bold transition ${
-                  submitted
-                    ? 'bg-green-600 cursor-default'
-                    : 'bg-gradient-to-r from-yellow-400 to-blue-500 hover:scale-105'
-                }`}
-              >
-                {submitted ? '✅ Wallet Submitted' : loading ? 'Submitting...' : 'Submit Wallet'}
-              </button>
-              {error && <p className="text-red-500">{error}</p>}
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  value={walletInput}
+                  onChange={(e) => setWalletInput(e.target.value.trim())}
+                  placeholder="Enter your Ethereum wallet address"
+                  className="flex-grow px-4 py-3 rounded-lg border border-yellow-400 bg-blue-950/50 text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
+                <button
+                  onClick={handleSubmit}
+                  disabled={submitted || loading}
+                  className={`px-6 py-3 rounded-lg font-bold whitespace-nowrap transition ${
+                    submitted
+                      ? 'bg-green-600 cursor-default'
+                      : 'bg-gradient-to-r from-yellow-400 to-blue-500 hover:scale-105'
+                  }`}
+                >
+                  {submitted ? '✅ Submitted' : loading ? 'Submitting...' : 'Submit'}
+                </button>
+              </div>
+              {error && <p className="text-red-500 text-center">{error}</p>}
             </div>
           )}
 
           {/* Success */}
-{submitted && (
-  <motion.div
-    className="mt-6 text-center space-y-4"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-  >
-    <p className="text-sm text-blue-200 break-all">
-      📌 Submitted Wallet: <span className="font-mono text-yellow-300">{walletInput}</span>
-    </p>
-    <p className="text-lg font-semibold text-yellow-300">
-      🎉 Dawg, your wallet is locked in. Stay tuned for the next phase!
-    </p>
-    <motion.img
-      src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
-      alt="Success GIF"
-      className="mx-auto w-48 rounded-xl shadow-lg"
-      animate={{ rotate: [-5, 5, -5] }}
-      transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-    />
-  </motion.div>
-)}
-
+          {submitted && (
+            <motion.div
+              className="mt-6 text-center space-y-4 bg-blue-950/40 border border-green-500 rounded-xl p-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="text-sm text-blue-200 break-all">
+                📌 Submitted Wallet: <span className="font-mono text-yellow-300">{walletInput}</span>
+              </p>
+              <p className="text-lg font-semibold text-yellow-300">
+                🎉 Dawg, your wallet is locked in. Stay tuned for the next phase!
+              </p>
+              <motion.img
+                src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
+                alt="Success GIF"
+                className="mx-auto w-48 rounded-xl shadow-lg"
+                animate={{ rotate: [-5, 5, -5] }}
+                transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              />
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="mt-16">
