@@ -236,25 +236,29 @@ export default function ClaimPage() {
           )}
 
           {/* Success */}
-          {submitted && (
-            <motion.div
-              className="mt-6 text-center space-y-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <p className="text-lg font-semibold text-yellow-300">
-                🎉 Dawg, your wallet is locked in. Stay tuned for the next phase!
-              </p>
-              <motion.img
-                src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
-                alt="Success GIF"
-                className="mx-auto w-48 rounded-xl shadow-lg"
-                animate={{ rotate: [-5, 5, -5] }}
-                transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-              />
-            </motion.div>
-          )}
+{submitted && (
+  <motion.div
+    className="mt-6 text-center space-y-4"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    <p className="text-sm text-blue-200 break-all">
+      📌 Submitted Wallet: <span className="font-mono text-yellow-300">{walletInput}</span>
+    </p>
+    <p className="text-lg font-semibold text-yellow-300">
+      🎉 Dawg, your wallet is locked in. Stay tuned for the next phase!
+    </p>
+    <motion.img
+      src="https://media.giphy.com/media/jp2KXzsPtoKFG/giphy.gif"
+      alt="Success GIF"
+      className="mx-auto w-48 rounded-xl shadow-lg"
+      animate={{ rotate: [-5, 5, -5] }}
+      transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+    />
+  </motion.div>
+)}
+
         </motion.div>
 
         <div className="mt-16">
