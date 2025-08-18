@@ -11,6 +11,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 export default function ClaimPage() {
   const [agreed, setAgreed] = useState(false);
+  const [joined, setJoined] = useState(false); // NEW STATE
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -18,7 +19,7 @@ export default function ClaimPage() {
   const [walletInput, setWalletInput] = useState('');
 
   // === STEP CONTROL ===
-  const currentStep = !agreed ? 0 : !submitted ? 1 : 2;
+  const currentStep = !agreed ? 0 : !joined ? 1 : !submitted ? 2 : 3;
 
   useEffect(() => {
     const fetchStartTime = async () => {
@@ -77,7 +78,6 @@ export default function ClaimPage() {
       return;
     }
 
-    // Basic ETH address validation
     if (!/^0x[a-fA-F0-9]{40}$/.test(walletInput)) {
       setError('Invalid Ethereum wallet address.');
       setLoading(false);
@@ -119,7 +119,8 @@ export default function ClaimPage() {
     return `${hrs}:${mins}:${secs}`;
   };
 
-  const steps = ["Agree to Terms", "Enter Wallet", "Submit", "Done"];
+  // UPDATED steps
+  const steps = ["Agree to Terms", "Join Us", "Enter Wallet", "Done"];
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 text-white relative overflow-hidden">
@@ -174,7 +175,7 @@ export default function ClaimPage() {
             </div>
           )}
 
-          {/* Terms & Eligibility */}
+          {/* Terms */}
           <div className="space-y-4 text-sm sm:text-base text-left">
             <h2 className="text-yellow-300 font-semibold">Eligibility Criteria:</h2>
             <ul className="list-disc list-inside space-y-1 text-blue-100">
@@ -210,8 +211,39 @@ export default function ClaimPage() {
             </label>
           </div>
 
+          {/* NEW Join Us step */}
+          {agreed && !joined && (
+            <div className="space-y-4 text-center">
+              <p className="text-yellow-300 font-semibold">Join the pack before continuing 🐾</p>
+              <div className="flex justify-center gap-4">
+                <a
+                  href="https://twitter.com/yourhandle" // replace with real
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gradient-to-r from-sky-400 to-blue-600 rounded-lg font-bold hover:scale-105 transition"
+                >
+                  🐦 Follow on Twitter
+                </a>
+                <a
+                  href="https://t.me/yourchannel" // replace with real
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gradient-to-r from-green-400 to-teal-600 rounded-lg font-bold hover:scale-105 transition"
+                >
+                  💬 Join Telegram
+                </a>
+              </div>
+              <button
+                onClick={() => setJoined(true)}
+                className="mt-4 px-6 py-3 bg-yellow-500 text-blue-900 font-bold rounded-lg hover:scale-105 transition"
+              >
+                ✅ I’ve Joined
+              </button>
+            </div>
+          )}
+
           {/* Wallet Input */}
-          {agreed && !submitted && (
+          {agreed && joined && !submitted && (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
