@@ -217,7 +217,7 @@ export default function ClaimPage() {
               <p className="text-yellow-300 font-semibold">Join the pack before continuing 🐾</p>
               <div className="flex justify-center gap-4">
                 <a
-                  href="https://twitter.com/yourhandle" // replace with real
+                  href="https://twitter.com/arbipupcoin" // replace with real
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-sky-400 to-blue-600 rounded-lg font-bold hover:scale-105 transition"
@@ -225,7 +225,7 @@ export default function ClaimPage() {
                   🐦 Follow on Twitter
                 </a>
                 <a
-                  href="https://t.me/yourchannel" // replace with real
+                  href="https://t.me/arbipupcoin" // replace with real
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-green-400 to-teal-600 rounded-lg font-bold hover:scale-105 transition"
