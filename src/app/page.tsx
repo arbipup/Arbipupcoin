@@ -125,7 +125,7 @@ export default function Home() {
             <li>Wallet registration is required before claiming</li>
             <li>
               For security best practices, we recommend using a{" "}
-              <strong className="text-yellow-300">newly created wallet</strong> 
+              <strong className="text-yellow-300">newly created wallet, </strong> 
               instead of one linked to your main assets
             </li>
             <li>🚨 Registration closes soon, so make sure to register in time</li>
