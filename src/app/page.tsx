@@ -187,12 +187,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-      </main>
+                </section>
+          </main>
+          {/* ✅ Footer properly placed inside the return */}
+          <Footer />
+        </div>
+      );
+    }
 
-      {/* ✅ Footer properly placed inside the return */}
-      <Footer />
-    </div>
-  );
-}
 
