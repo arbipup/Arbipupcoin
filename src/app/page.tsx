@@ -102,35 +102,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Airdrop Details Section */}
+                {/* Airdrop Details Section */}
         <section className="max-w-3xl mx-auto mt-16 mb-20 bg-black/60 backdrop-blur-md border border-blue-400 rounded-2xl p-8 shadow-2xl space-y-6">
           <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-300 via-yellow-200 to-white bg-clip-text text-transparent">
             🎉 Arbipup Airdrop Details
           </h2>
 
           <p className="text-gray-200 text-base leading-relaxed">
-  The Arbipup Airdrop is our way of celebrating the vibrant{" "}
-  <strong className="text-yellow-300">Arbitrum community</strong>. 
-  Instead of limiting rewards only to past activity, we have opened registration 
-  to everyone, whether you are new to Arbitrum or already part of it. 
-  Arbipup is about inclusivity, fun, and giving everyone a fair chance to join in. 
-  All you need to do is register your wallet before the deadline and you’ll be set 
-  for the claim.
-</p>
+            The Arbipup Airdrop is our way of celebrating the vibrant{" "}
+            <strong className="text-yellow-300">Arbitrum community</strong>. 
+            Instead of limiting rewards only to past activity, we have opened registration 
+            to everyone, whether you are new to Arbitrum or already part of it. 
+            Arbipup is about inclusivity, fun, and giving everyone a fair chance to join in. 
+            All you need to do is register your wallet before the deadline and you’ll be set 
+            for the claim.
+          </p>
 
-<h3 className="text-yellow-300 font-semibold mt-4">📜 How It Works:</h3>
-<ul className="list-disc list-inside space-y-1 text-gray-200">
-  <li>Anyone can register a wallet, no prior Arbitrum history required</li>
-  <li>Simply submit your wallet address on Airdrop page to be included</li>
-  <li>Wallet registration is required before claiming</li>
-  <li>
-    For security best practices, we recommend using a{" "}
-    <strong className="text-yellow-300">newly created wallet</strong> 
-    instead of one linked to your main assets
-  </li>
-  <li>🚨 Registration closes soon, so make sure to register in time</li>
-</ul>
-
+          <h3 className="text-yellow-300 font-semibold mt-4">📜 How It Works:</h3>
+          <ul className="list-disc list-inside space-y-1 text-gray-200">
+            <li>Anyone can register a wallet, no prior Arbitrum history required</li>
+            <li>Simply submit your wallet address on Airdrop page to be included</li>
+            <li>Wallet registration is required before claiming</li>
+            <li>
+              For security best practices, we recommend using a{" "}
+              <strong className="text-yellow-300">newly created wallet</strong> 
+              instead of one linked to your main assets
+            </li>
+            <li>🚨 Registration closes soon, so make sure to register in time</li>
+          </ul>
+        </section>   {/* ✅ now properly closed */}
 
         {/* Tokenomics */}
         <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-yellow-300 my-20 text-center">
@@ -166,33 +166,32 @@ export default function Home() {
           </div>
         </section>
 
-       {/* Chaotic Pup Carnival */}
-<section className="max-w-6xl mx-auto mt-20 px-6">
-  <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
-    <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
-      🌀 Chaotic Pup Carnival
-    </h2>
-    <div className="grid sm:grid-cols-3 gap-6 text-gray-200">
-      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-        <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
-        <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
-      </div>
-      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-        <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
-        <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
-      </div>
-      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-        <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
-        <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
-      </div>
+        {/* Chaotic Pup Carnival */}
+        <section className="max-w-6xl mx-auto mt-20 px-6">
+          <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
+            <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
+              🌀 Chaotic Pup Carnival
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-6 text-gray-200">
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
+                <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
+              </div>
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
+                <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
+              </div>
+              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+                <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
+                <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ✅ Footer after main, before closing div */}
+      <Footer />
     </div>
-  </div>
-</section>
-
-</main>
-
-{/* ✅ Footer is after main, before closing div */}
-<Footer />
-
-</div>
-);
+  );
+}
