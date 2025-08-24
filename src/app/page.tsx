@@ -167,30 +167,31 @@ export default function Home() {
         </section>
 
         {/* Chaotic Pup Carnival */}
-        <section className="max-w-6xl mx-auto mt-20 px-6">
-          <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
-            <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
-              🌀 Chaotic Pup Carnival
-            </h2>
-            <div className="grid sm:grid-cols-3 gap-6 text-gray-200">
-              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-                <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
-                <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
-              </div>
-              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-                <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
-                <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
-              </div>
-              <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
-                <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
-                <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
-              </div>
-            </div>
-          </div>
-          </section>
-          </main>
-          {/* ✅ Footer properly placed inside the return */}
-          <Footer />
-        </div>
-      );
-    }
+<section className="max-w-6xl mx-auto mt-20 px-6">
+  <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
+    <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
+      🌀 Chaotic Pup Carnival
+    </h2>
+    <div className="grid sm:grid-cols-3 gap-6 text-gray-200">
+      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+        <h3 className="text-lg font-bold text-yellow-300 mb-2">🚀 Rug Pull Rodeo</h3>
+        <p>Bulls ride the charts until gravity wins. Last one holding the candle wins bragging rights.</p>
+      </div>
+      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+        <h3 className="text-lg font-bold text-yellow-300 mb-2">🎭 Meme Mask Parade</h3>
+        <p>Pups swap avatars and bark cryptic alpha while spinning in meme masks.</p>
+      </div>
+      <div className="bg-black/70 p-5 rounded-xl border border-blue-400 hover:border-yellow-300 transition-colors">
+        <h3 className="text-lg font-bold text-yellow-300 mb-2">💣 FOMO Fireworks</h3>
+        <p>Fireworks made of on-chain transactions, lighting up wallets and burning gas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* ✅ Footer properly inside */}
+<Footer />
+
+</main>
+</div>
+);
