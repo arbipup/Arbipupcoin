@@ -176,7 +176,7 @@ export default function ClaimPage() {
           )}
 {/* Highlight Banner */}
 <div className="bg-yellow-300 text-black text-center font-semibold p-3 rounded-xl shadow-lg">
-  🚨 Registration closes soon — don’t miss out!
+  🚨 Registration closes soon — do not miss out!
 </div>
 
 {/* Guide */}
@@ -187,7 +187,7 @@ export default function ClaimPage() {
     <li>Create (generate) a new wallet inside the app.</li>
     <li>Copy your wallet address (it usually starts with <code className="text-yellow-300">0x...</code>).</li>
     <li>Paste and submit your address here on this page.</li>
-    <li>That’s it, you’re done!</li>
+    <li>Thats it, you are done!</li>
   </ol>
 </div>
 
@@ -217,7 +217,7 @@ export default function ClaimPage() {
               />
               <span className="text-blue-100">
                 Submission = my choice, my bark.
-                The final woof on eligibility? Arbipup’s pack calls it.
+                The final woof on eligibility? Arbipup pack calls it.
               </span>
             </label>
           </div>
