@@ -174,28 +174,39 @@ export default function ClaimPage() {
               ⏳ Time Left: {formatTime(remainingTime)}
             </div>
           )}
+{/* Highlight Banner */}
+<div className="bg-yellow-300 text-black text-center font-semibold p-3 rounded-xl shadow-lg">
+  🚨 Registration closes soon — don’t miss out!
+</div>
 
-          {/* Terms */}
-          <div className="space-y-4 text-sm sm:text-base text-left">
-            <h2 className="text-yellow-300 font-semibold">Eligibility Criteria:</h2>
-            <ul className="list-disc list-inside space-y-1 text-blue-100">
-              <li>
-                Interacted with Arbitrum between{' '}
-                <strong className="text-yellow-300">Apr 11, 2024 – Apr 11, 2025</strong>
-              </li>
-              <li>
-                Snapshot: <strong className="text-yellow-300">Apr 11, 2025 – 00:00 AM UTC</strong>
-              </li>
-              <li>
-                Eligibility is{' '}
-                <strong className="text-yellow-300">
-                  not automatic, you must register your wallet
-                </strong>
-              </li>
-              <li>
-                Ends after <strong className="text-yellow-300">3 days</strong>
-              </li>
-            </ul>
+{/* Guide */}
+<div className="space-y-4 text-sm sm:text-base text-left mt-4">
+  <h2 className="text-yellow-300 font-semibold">How to Submit Your Wallet</h2>
+  <ol className="list-decimal list-inside space-y-1 text-blue-100">
+    <li>Download or install the <strong className="text-yellow-300">Zerion Wallet</strong>.</li>
+    <li>Create (generate) a new wallet inside the app.</li>
+    <li>Copy your wallet address (it usually starts with <code className="text-yellow-300">0x...</code>).</li>
+    <li>Paste and submit your address here on this page.</li>
+    <li>That’s it, you’re done!</li>
+  </ol>
+</div>
+
+{/* Notes */}
+<div className="space-y-4 text-sm sm:text-base text-left">
+  <h2 className="text-yellow-300 font-semibold">Important Notes:</h2>
+  <ul className="list-disc list-inside space-y-1 text-blue-100">
+    <li>
+      Registration is{' '}
+      <strong className="text-yellow-300">
+        not automatic — you must register your wallet
+      </strong>
+    </li>
+    <li>
+      🚨 Registration closes soon!
+    </li>
+  </ul>
+</div>
+
 
             <label className="flex items-start space-x-2 mt-4 cursor-pointer">
               <input
