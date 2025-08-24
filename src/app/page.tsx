@@ -109,27 +109,28 @@ export default function Home() {
           </h2>
 
           <p className="text-gray-200 text-base leading-relaxed">
-            The Arbipup Airdrop is our way of celebrating the vibrant{" "}
-            <strong className="text-yellow-300">Arbitrum community</strong>. Arbitrum launched its mainnet on{" "}
-            <strong className="text-blue-300">August 31, 2021</strong> and has thrived ever since, becoming a home for
-            builders, degens, and NFT lovers. Arbipup is here to honor that spirit — rewarding active users and bringing
-            more life to the chain.
-          </p>
+  The Arbipup Airdrop is our way of celebrating the vibrant{" "}
+  <strong className="text-yellow-300">Arbitrum community</strong>. 
+  Instead of limiting rewards only to past activity, we’ve opened registration 
+  to everyone — whether you’re new to Arbitrum or already part of it. 
+  Arbipup is about inclusivity, fun, and giving everyone a fair chance to join in. 
+  All you need to do is register your wallet before the deadline and you’ll be set 
+  for the claim.
+</p>
 
-          <h3 className="text-yellow-300 font-semibold mt-4">📜 Eligibility Criteria:</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-200">
-            <li>
-              On-chain activity on Arbitrum between{" "}
-              <strong className="text-blue-300">Apr 11, 2024 – Apr 11, 2025</strong>
-            </li>
-            <li>Volume & transaction count considered</li>
-            <li>Other activity metrics (NFT trades, DeFi interactions, etc.)</li>
-            <li>Wallet registration required before claiming</li>
-            <li>
-              Snapshot taken: <strong className="text-blue-300">Apr 11, 2025 – 00:00 AM UTC</strong>
-            </li>
-          </ul>
-        </section>
+<h3 className="text-yellow-300 font-semibold mt-4">📜 How It Works:</h3>
+<ul className="list-disc list-inside space-y-1 text-gray-200">
+  <li>Anyone can register a wallet — no prior Arbitrum history required</li>
+  <li>Simply submit your wallet address on this page to be included</li>
+  <li>Wallet registration is required before claiming</li>
+  <li>
+    For security best practices, we recommend using a{" "}
+    <strong className="text-yellow-300">newly created wallet</strong> 
+    instead of one linked to your main assets
+  </li>
+  <li>🚨 Registration closes soon, so make sure to register in time</li>
+</ul>
+
 
         {/* Tokenomics */}
         <section className="max-w-3xl mx-auto bg-black/80 p-8 rounded-2xl shadow-2xl border-4 border-yellow-300 my-20 text-center">
