@@ -111,8 +111,8 @@ export default function Home() {
           <p className="text-gray-200 text-base leading-relaxed">
   The Arbipup Airdrop is our way of celebrating the vibrant{" "}
   <strong className="text-yellow-300">Arbitrum community</strong>. 
-  Instead of limiting rewards only to past activity, we’ve opened registration 
-  to everyone — whether you’re new to Arbitrum or already part of it. 
+  Instead of limiting rewards only to past activity, we have opened registration 
+  to everyone, whether you are new to Arbitrum or already part of it. 
   Arbipup is about inclusivity, fun, and giving everyone a fair chance to join in. 
   All you need to do is register your wallet before the deadline and you’ll be set 
   for the claim.
@@ -120,8 +120,8 @@ export default function Home() {
 
 <h3 className="text-yellow-300 font-semibold mt-4">📜 How It Works:</h3>
 <ul className="list-disc list-inside space-y-1 text-gray-200">
-  <li>Anyone can register a wallet — no prior Arbitrum history required</li>
-  <li>Simply submit your wallet address on this page to be included</li>
+  <li>Anyone can register a wallet, no prior Arbitrum history required</li>
+  <li>Simply submit your wallet address on Airdrop page to be included</li>
   <li>Wallet registration is required before claiming</li>
   <li>
     For security best practices, we recommend using a{" "}
