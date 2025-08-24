@@ -166,7 +166,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Chaotic Pup Carnival */}
+       {/* Chaotic Pup Carnival */}
 <section className="max-w-6xl mx-auto mt-20 px-6">
   <div className="bg-gradient-to-br from-blue-900 via-black to-yellow-900 p-10 rounded-2xl border-4 border-blue-500 shadow-2xl">
     <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-200 via-yellow-200 to-white bg-clip-text text-transparent mb-8">
@@ -189,9 +189,10 @@ export default function Home() {
   </div>
 </section>
 
-{/* ✅ Footer properly inside */}
+</main>
+
+{/* ✅ Footer is after main, before closing div */}
 <Footer />
 
-</main>
 </div>
 );
