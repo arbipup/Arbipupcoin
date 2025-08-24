@@ -208,19 +208,21 @@ export default function ClaimPage() {
 </div>
 
 
-            <label className="flex items-start space-x-2 mt-4 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
-                className="mt-1 w-5 h-5 accent-yellow-400"
-              />
-              <span className="text-blue-100">
-                Submission = my choice, my bark.
-                The final woof on eligibility? Arbipup pack calls it.
-              </span>
-            </label>
-          </div>
+           <div>
+  <label className="flex items-start space-x-2 mt-4 cursor-pointer">
+    <input
+      type="checkbox"
+      checked={agreed}
+      onChange={(e) => setAgreed(e.target.checked)}
+      className="mt-1 w-5 h-5 accent-yellow-400"
+    />
+    <span className="text-blue-100">
+      Submission = my choice, my bark.
+      The final woof on eligibility? Arbipup pack calls it.
+    </span>
+  </label>
+</div>
+
 
           {/* NEW Join Us step */}
           {agreed && !joined && (
