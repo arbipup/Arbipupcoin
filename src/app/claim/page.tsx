@@ -165,7 +165,7 @@ export default function ClaimPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            🐶 Arbipup Airdrop Registration, Lock In Your Wallet
+             Arbipup Airdrop Registration, Lock In Your Wallet
           </motion.h1>
 
           {/* Timer */}
@@ -176,7 +176,7 @@ export default function ClaimPage() {
           )}
 {/* Highlight Banner */}
 <div className="bg-yellow-300 text-black text-center font-semibold p-3 rounded-xl shadow-lg">
-  🚨 Registration closes soon — do not miss out!
+  Registration closes soon, do not miss out!
 </div>
 
 {/* Guide */}
@@ -202,7 +202,7 @@ export default function ClaimPage() {
       </strong>
     </li>
     <li>
-      🚨 Registration closes soon!
+       Registration closes soon!
     </li>
   </ul>
 </div>
@@ -235,7 +235,7 @@ export default function ClaimPage() {
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-sky-400 to-blue-600 rounded-lg font-bold hover:scale-105 transition"
                 >
-                  🐦 Follow on Twitter
+                  🐦 Follow our X
                 </a>
                 <a
                   href="https://t.me/arbipupcoin" // replace with real
@@ -243,7 +243,7 @@ export default function ClaimPage() {
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-green-400 to-teal-600 rounded-lg font-bold hover:scale-105 transition"
                 >
-                  💬 Join Telegram
+                  💬 Join our Telegram
                 </a>
               </div>
               <button
