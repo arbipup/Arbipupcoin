@@ -50,7 +50,7 @@ export default function Navbar() {
           <FaTwitter className="w-full h-full" />
         </a>
         <a 
-          href="https://t.me/arbipupcoin" 
+          href="https://t.me/arbipup" 
           target="_blank" 
           rel="noopener noreferrer"
           className="w-4 h-4 sm:w-6 sm:h-6 flex items-center justify-center"
