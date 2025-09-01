@@ -238,7 +238,7 @@ export default function ClaimPage() {
                   🐦 Follow our X
                 </a>
                 <a
-                  href="https://t.me/arbipupcoin" // replace with real
+                  href="https://t.me/arbipup" // replace with real
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-green-400 to-teal-600 rounded-lg font-bold hover:scale-105 transition"
