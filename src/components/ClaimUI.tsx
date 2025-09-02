@@ -345,7 +345,7 @@ export default function ClaimPage() {
           >
             <motion.div whileHover={{ rotateX: 3, rotateY: -3 }} transition={{ type: 'spring', stiffness: 200, damping: 14 }}>
               <h3 className="text-blue-300 font-extrabold text-lg">3. Eligibility Check</h3>
-              <p className="text-sm text-gray-300 mt-2">In this section, we will review your activity on the Arbitrum network to determine your eligibility</p>
+              <p className="text-sm text-gray-300 mt-2"> In this section, we will check if your wallet was submitted before the initial time frame we set. </p>
 
               <div className="mt-6">
                 {eligibility === 'unknown' && (
@@ -465,7 +465,7 @@ export default function ClaimPage() {
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-2xl font-extrabold text-white">🎉 Bag secured, dawg!</h2>
-                <p className="text-sm text-gray-300 mt-2">You bagged 12,000 $ArbiPup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
+                <p className="text-sm text-gray-300 mt-2">You bagged 12,000 $Arbipup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
               </div>
 
               <button
