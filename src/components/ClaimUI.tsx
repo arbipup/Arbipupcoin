@@ -217,7 +217,7 @@ export default function ClaimPage() {
     {/* Info Card */}
     <div className="max-w-4xl mx-auto mt-8 mb-8">
       <div className="bg-blue-900/40 backdrop-blur-sm border border-yellow-400/40 rounded-lg p-4 text-center">
-        Eligible wallets can snag <span className="text-yellow-300 font-bold">8000 $Arbipup tokens </span>, Check if you are in the pack and claim your spot!.
+        Eligible wallets can snag <span className="text-yellow-300 font-bold">12,000 $Arbipup tokens on FCFS </span>, Check if you are in the pack and claim your spot!.
       </div>
     </div>
 
@@ -423,7 +423,7 @@ export default function ClaimPage() {
                       boxShadow: '0 8px 30px rgba(250,204,21,0.18)',
                     }}
                   >
-                    {isClaiming ? 'Processing...' : `Claim 8,000 $ArbiPup`}
+                    {isClaiming ? 'Processing...' : `Claim 12,000 $ArbiPup`}
                   </button>
                 ) : (
                   <div className="text-center text-yellow-300 font-semibold">
@@ -465,7 +465,7 @@ export default function ClaimPage() {
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-2xl font-extrabold text-white">🎉 Bag secured, dawg!</h2>
-                <p className="text-sm text-gray-300 mt-2">You bagged 8,000 $ArbiPup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
+                <p className="text-sm text-gray-300 mt-2">You bagged 12,000 $ArbiPup, enjoy the gains, dawg. Thanks for riding with the fam. Stay tuned, big listing news dropping soon.!</p>
               </div>
 
               <button
