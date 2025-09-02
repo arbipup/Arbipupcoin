@@ -302,9 +302,6 @@ export default function ClaimPage() {
               <h3 className="text-yellow-300 font-extrabold text-lg">2. Terms & Conditions</h3>
               <ul className="text-sm list-disc pl-5 text-gray-300 space-y-1 mt-3">
                 <li>One wallet per degen. Do not be greedy, share the love.</li>
-                <li>Arbitrum only. L2 gang, we ride together.</li>
-                <li>No contract wallets. Bots, take the L and cry.</li>
-                <li>Once you claim, that is it. No undo, no second claim.</li>
                 <li>Not financial advice. This is for fun, not for your retirement plan.</li>
                 <li>Volatility is the game. Prices go up, down, and sideways, sometimes in the same minute.</li>
                 <li>You are 100% responsible for your clicks, trades, and memes.</li>
